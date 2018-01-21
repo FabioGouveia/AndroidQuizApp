@@ -26,8 +26,11 @@ import java.util.ArrayList;
  * The difference between them is that the RecyclerView can support a large amount of data and it can recycle views, which give
  * as more performance in case of a huge amount of data.
  *
+ * @see Level
+ *
  * @author Fábio Gouveia
  * @version 1.0
+ *
  */
 
 class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardAdapter.ViewHolder> {
@@ -70,7 +73,7 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
     }
 
     @Override
-    public void onBindViewHolder(final ViewHolder holder, final int position) {
+    public void onBindViewHolder(final ViewHolder holder, int position) {
 
         final Level level = levels.get(position);
 
@@ -101,8 +104,8 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //If level enabled
-                if(level.isUnlocked(levels, position)){
+                //If level enabled allow the user to navigate into questions activity.
+                if(level.isUnlocked(levels, holder.getAdapterPosition())){
 
                     final Intent intent = new Intent(context, QuestionsActivity.class);
                     intent.putExtra(Level.LEVEL_KEY, level);
