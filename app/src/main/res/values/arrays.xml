@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!-- Level strings array:TODO: Comment this part of edition better...
+
+         To create more levels you have to create an image file also with the name of
+         level followed by "_level_icon" and the extension of your image file, then you have to store it
+         in drawable folder.
+         Also you have to create the corresponding image to representing the level locked state and stored
+         with level name followed by "_level_icon_disabled".
+         If you don't follow this step the level card corresponding to this level will appear with no background image.
+
+         Example of image storing for beginner level:
+
+            drawable/
+                beginner_level_icon.png
+                beginner_level_icon_disabled.png
+
+
+         Next declare the earnings for the level you add, see level_earning string array bellow, also if
+         exists something required to unlock the level, declare it on required_to_unlock_level array bellow.
+
+         Don't forget to declare the minimum percentage required to unlock the level and get the
+         earnings on the score_needed_to_unlock integer array in integers.xml file.
+
+     -->
+
+    <string-array name="level_name">
+        <item>Beginner</item>
+        <item>Amateur</item>
+        <item>Professional</item>
+        <item>Advanced</item>
+    </string-array>
+
+    <!-- Level earning strings array TODO: control the length of earnings phrases-->
+    <string-array name="level_earnings">
+        <item>Earn Android baby status</item><!-- Beginner earning -->
+        <item>Earn Android caterpillar status</item><!-- Amateur earning -->
+        <item>Earn Android embryo status</item><!-- Professional earning -->
+        <item>Earn Android butterfly status</item><!-- Advanced earning -->
+    </string-array>
+
+    <string-array name="required_to_unlock_level">
+        <item>null</item><!-- First level is the start point, is unlocked from the beginning -->
+        <item>Reach Android baby status to unlock</item>
+        <item>Reach Android caterpillar status to unlock</item>
+        <item>Reach Android embryo status to unlock</item>
+    </string-array>
+
+    <!-- Integer array with the minimum score percentage needed to
+         unlock the level and get the earnings -->
+    <integer-array name="score_required_to_unlock">
+        <item>60</item><!-- Beginner level -->
+        <item>75</item><!-- Amateur level -->
+        <item>85</item><!-- Professional level -->
+        <item>100</item><!-- Advanced level -->
+    </integer-array>
+
+    <!-- Level card icons -->
+    <array name="level_card_icon">
+        <item>@drawable/beginner_level_vector</item>
+        <item>@drawable/amateur_level_icon</item>
+        <item>@drawable/professional_level_icon</item>
+        <item>@drawable/advanced_level_icon</item>
+    </array>
+    <array name="level_card_icon_disabled">
+        <item>null</item><!-- the first level is never disabled -->
+        <item>@drawable/amateur_level_icon_disabled</item>
+        <item>@drawable/professional_level_icon_disabled</item>
+        <item>@drawable/advanced_level_icon_disabled</item>
+    </array>
+
+</resources>

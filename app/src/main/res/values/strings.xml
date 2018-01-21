@@ -1,0 +1,47 @@
+<resources>
+
+    <!-- Global strings -->
+    <string name="app_name">Android Quiz App</string>
+    <string name="btn_answer">Answer</string>
+
+    <!-- Menu strings -->
+    <string name="show_question_progress">Show question progress</string>
+    <string name="clean_level_progress">Clean level progress</string>
+
+    <!-- Dialogs strings -->
+    <string name="level_progress_dialog_title">%1$s level progress</string>
+    <string name="your_progress">Your progress %1$d %%</string>
+    <string name="show_statistics">Go to statistics</string>
+    <string name="cancel_dialog">Cancel</string>
+    <string name="clean_progress">Clean</string>
+
+    <!-- Intro animation strings -->
+    <string-array name="intro_text">
+        <item>Welcome to Android Quiz App</item>
+        <item>This app is part of Google Challenge Scholarship: Android Basics 2017</item>
+        <item>Hope you enjoy it..!</item>
+    </string-array>
+
+    <!-- Intro animation skip button -->
+    <string name="skip_intro_button">Skip intro >></string>
+
+    <!-- Level strings -->
+    <string name="level_locked">Locked</string>
+
+    <!-- Level card strings -->
+    <string name="number_of_questions_placeholder">%1$d Questions</string>
+    <string name="beginner_level_vector_content_description">Beginner level vector</string>
+    <string name="score_placeholder">Score : %1$d %%</string>
+
+    <!-- Question strings -->
+    <string name="question_label">Question</string>
+
+    <!-- Answer strings -->
+    <string name="passed_question_label">Passed</string>
+    <string name="failed_question_tip">Tip:\n %1$s</string>
+
+    <!-- Statistics strings -->
+    <string name="progress">Progress: %1$s</string>
+    <string name="passed_questions">Passed questions: %1$s</string>
+
+</resources>

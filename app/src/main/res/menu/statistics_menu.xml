@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/clean_level_progress"
+        android:title="@string/clean_level_progress"
+        android:icon="@drawable/ic_clean_level_progress"
+        app:showAsAction="always" />
+</menu>

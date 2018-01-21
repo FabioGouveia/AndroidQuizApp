@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- Define the progressbar background properties -->
+    <item android:id="@android:id/background">
+        <shape>
+            <solid
+                android:color="@color/colorProgressbarBackground" />
+        </shape>
+    </item>
+
+    <!-- Define the progress properties like color, etc-->
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <solid
+                    android:color="@color/colorProgressbar" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

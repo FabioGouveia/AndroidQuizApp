@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="230dp"
+    android:layout_gravity="center"
+    card_view:cardBackgroundColor="#FFF"
+    card_view:cardCornerRadius="8dp"
+    card_view:cardElevation="4dp"
+    card_view:cardUseCompatPadding="true">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/card_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/level_card_header_bgd">
+
+            <TextView
+                android:id="@+id/level_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:textAppearanceMedium"
+                android:textColor="@color/colorPrimaryText"
+                tools:text="Beginner" />
+
+            <TextView
+                android:id="@+id/level_earnings_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/level_text_view"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/colorPrimaryText"
+                tools:text="Earn Android baby status" />
+
+            <TextView
+                android:id="@+id/number_of_questions_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:drawableLeft="@drawable/ic_lock_white"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                tools:text="10 questions"
+                android:textAppearance="?android:textAppearanceSmall"
+                android:textColor="@color/colorPrimaryText" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/level_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:contentDescription="@string/beginner_level_vector_content_description"
+            tools:src="@drawable/beginner_level_vector" />
+
+        <TextView
+            android:id="@+id/footer_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/level_card_footer_bgd"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/colorPrimaryText"
+            tools:text="Score 0%" />
+
+    </LinearLayout>
+
+
+</android.support.v7.widget.CardView>

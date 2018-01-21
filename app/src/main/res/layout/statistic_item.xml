@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/progressbarLabel"
+        android:textAppearance="?android:textAppearanceMedium"
+        style="@style/LevelProgressbarLabel"/>
+
+    <ProgressBar
+        android:id="@+id/progressbar"
+        style="@style/LevelProgressbar"/>
+
+    <RelativeLayout
+        android:id="@+id/progress_info_panel_locked"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/level_card_footer_bgd_disabled">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:gravity="center"
+            android:text="@string/level_locked"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/progress_info_panel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/level_card_footer_bgd"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/progress_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/colorPrimaryText"/>
+
+        <TextView
+            android:id="@+id/num_questions_passed_text_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:textAppearanceSmall"
+            android:textColor="@color/colorPrimaryText"/>
+
+    </LinearLayout>
+
+</LinearLayout>

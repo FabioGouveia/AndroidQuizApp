@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- primary color palette -->
+    <color name="colorPrimary">#3f51b5</color>
+    <color name="colorPrimaryLight">#757de8</color>
+    <color name="colorPrimaryDark">#002984</color>
+    <color name="colorPrimaryText">#ffffff</color>
+
+
+    <color name="colorSecondary">#e8eaf6</color>
+    <color name="colorSecondaryLight">#ffffff</color>
+    <color name="colorSecondaryDark">#b6b8c3</color>
+    <color name="colorSecondaryText">#000000</color>
+
+    <color name="colorButtonNormal">#757de8</color>
+    <color name="colorTransparent">#00ffffff</color>
+    <color name="colorPassedQuestionResultText">#488705</color>
+
+
+    <color name="colorProgressbarBackground">#5e3f51b5</color>
+    <color name="colorProgressbar">@color/colorPrimaryDark</color>
+</resources>
