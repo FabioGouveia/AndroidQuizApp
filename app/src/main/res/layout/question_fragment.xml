@@ -11,21 +11,15 @@
         android:padding="32dp"
         tools:text="Insert in the text field below the attribute that changes the orientation of the elements inside a LinearLayout ?" />
 
+    <View style="@style/QuestionHeaderDivider" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:layout_below="@id/question_text_view"
-        android:background="@color/colorPrimary" />
-
+    <TextView
+        android:id="@+id/multiple_choice_question_hint_textView"
+        style="@style/MultipleChoiceHint"/>
 
     <RadioGroup
         android:id="@+id/answers_radio_group"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/question_text_view"
-        android:layout_marginTop="16dp"
-        android:visibility="gone">
+        style="@style/AnswersHolder">
 
         <RadioButton
             android:layout_width="match_parent"
@@ -55,12 +49,7 @@
 
     <LinearLayout
         android:id="@+id/checkBoxes_holder"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/question_text_view"
-        android:layout_marginTop="16dp"
-        android:orientation="vertical"
-        android:visibility="gone">
+        style="@style/AnswersHolder.checkBox">
 
         <CheckBox
             android:layout_width="wrap_content"
@@ -102,34 +91,17 @@
             android:inputType="textCapSentences|textMultiLine"
             android:maxLength="2000"
             android:maxLines="4"
-            android:hint="Your answer here..."
+            android:hint="@string/textual_answer_hint"
             android:visibility="gone"/>
 
     </android.support.design.widget.TextInputLayout>
 
     <Button
         android:id="@+id/answers_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="16dp"
-        android:text="@string/btn_answer"
-        android:textColor="#ffffff" />
+        style="@style/AnswerButton" />
 
     <TextView
-        android:id="@+id/passed_question_text_view"
-        android:fontFamily="monospace"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_marginBottom="64dp"
-        android:gravity="center"
-        android:textAllCaps="true"
-        android:textStyle="bold"
-        android:textColor="@color/colorPassedQuestionResultText"
-        android:textAppearance="?android:textAppearanceLarge"
-        android:text="@string/passed_question_label"
-        android:visibility="gone"/>
+        android:id="@+id/passed_question_label_text_view"
+        style="@style/PassedQuestionLabel"/>
 
 </RelativeLayout>
