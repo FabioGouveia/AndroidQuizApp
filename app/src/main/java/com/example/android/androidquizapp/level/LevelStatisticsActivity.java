@@ -90,8 +90,10 @@ public class LevelStatisticsActivity extends AppCompatActivity {
                     @Override
                     public void onPositiveButtonClicked() {
                         //Erase the level progress after a successful user confirmation.
-                        for (Question question: level.getQuestions()) {
-                            question.resetProgress();
+                        if(level != null) {
+                            for (Question question : level.getQuestions()) {
+                                question.resetProgress();
+                            }
                         }
                         //Erase persistent level progress.
                         QueryUtils.cleanProgress(getApplicationContext(), createLevels());
