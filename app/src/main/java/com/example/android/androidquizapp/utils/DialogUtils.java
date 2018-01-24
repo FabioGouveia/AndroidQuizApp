@@ -20,6 +20,7 @@ public class DialogUtils extends DialogFragment {
 
     public static final String LEVEL_PROGRESS_TITLE_KEY = "level_title_key";
     public static final String LEVEL_PROGRESS_SCORE_KEY = "level_score_key";
+    public static final String LEVEL_PROGRESS_WRONG_ANSWER_KEY = "level_attempts_key";
     public static final String CONFIRM_DIALOG_MESSAGE_KEY = "msg_key";
 
     private Type type;
@@ -88,6 +89,13 @@ public class DialogUtils extends DialogFragment {
         }else{ throw new DialogException("Type not found!"); }
     }
 
+    /**
+     * The createConfirmationDialog method creates a AlertDialog.Builder configured
+     * to work with one positive button and one cancel button as a normal confirmation dialog do.
+     *
+     * @param builder - An AlertDialog.Builder.
+     * @return AlertDialog.Builder - An AlertDialog.Builder configured to work has a confirmation dialog.
+     */
     private AlertDialog.Builder createConfirmationDialog(AlertDialog.Builder builder){
         builder.setMessage(getArguments().getString(CONFIRM_DIALOG_MESSAGE_KEY))
                 .setPositiveButton(R.string.clean_progress, new DialogInterface.OnClickListener() {
@@ -110,12 +118,16 @@ public class DialogUtils extends DialogFragment {
 
        //Bundle arguments.
         int progress = getArguments().getInt(LEVEL_PROGRESS_SCORE_KEY);
+        int wrongAnswers = getArguments().getInt(LEVEL_PROGRESS_WRONG_ANSWER_KEY);
+
         String progressString = String.format(getResources().getString(R.string.your_progress), progress);
+        String wrongAnswersString = String.format(getResources().getString(R.string.wrong_answers), wrongAnswers);
 
         //Inflate the dialog.
         View dialogLayout = getActivity().getLayoutInflater().inflate(R.layout.level_progress_dialog, null);
         ((ProgressBar) dialogLayout.findViewById(R.id.progress_dialog_progressBar)).setProgress(progress);
         ((TextView) dialogLayout.findViewById(R.id.progress_dialog_progress_text_view)).setText(progressString);
+        ((TextView) dialogLayout.findViewById(R.id.progress_dialog_wrong_answers_text_view)).setText(wrongAnswersString);
 
         builder.setTitle(String.format(getResources().getString(R.string.level_progress_dialog_title), getArguments().getString(LEVEL_PROGRESS_TITLE_KEY)))
                 .setView(dialogLayout)
