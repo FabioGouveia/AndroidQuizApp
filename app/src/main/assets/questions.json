@@ -38,7 +38,7 @@
       ]
     },
     {
-      "question" : "which of the elements below are view groups ?",
+      "question" : "Which of the elements below are view groups ?",
       "options" : [
         ["TextView", false],
         ["LinearLayout", true],
@@ -267,7 +267,7 @@
       ]
     },
     {
-      "question" : "What is Pending Intent in android ?",
+      "question" : "What is a Pending Intent in android ?",
       "options" : [
         ["An Intent suspended by Android OS", false],
         ["A cancelled Intent", false],
@@ -355,6 +355,20 @@
         "https://developer.android.com/guide/topics/ui/layout/gridview.html"
       ]
     }
+  ,
+    {
+      "question" : "if you need to create a preferences file that only refers to an activity, what method should we use ?",
+      "options" : [
+        ["PreferenceManager.getDefaultSharedPreferences()", false],
+        ["Context.getSharedPreferences()", false],
+        ["Activity.getPreferences()", true],
+        ["SharedPreferences.getPreferencesEditor()", false]
+      ],
+      "tip" : [
+        "The method SharedPreferences.getPreferencesEditor() doesn't exists.",
+        "https://developer.android.com/reference/android/content/SharedPreferences.html"
+      ]
+    }
   ],
   "advanced":[
     {
@@ -384,7 +398,7 @@
       ]
     },
     {
-      "question" : "What does BLOB acronym BLOB mean ?",
+      "question" : "What does acronym BLOB mean ?",
       "options" : [
         ["Binary large object", true],
         ["Bit low object", false],
@@ -404,6 +418,16 @@
       ],
       "tip" : [
         "The word pending says everything.",
+        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+      ]
+    },
+    {
+      "question" : "Which method is used to set an Adapter to a RecyclerView ?",
+      "options" : [
+        ["setAdapter,setAdapter(),setAdapter method,setAdapter() method,The method setAdapter,The method setAdapter(),The setAdapter method,The setAdapter() method", true]
+      ],
+      "tip" : [
+        "A Recycler view behaves like a ListView.",
         "https://developer.android.com/guide/topics/ui/layout/gridview.html"
       ]
     }
