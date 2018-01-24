@@ -6,7 +6,7 @@ import android.support.annotation.NonNull;
 import android.util.Log;
 
 import com.example.android.androidquizapp.level.Level;
-import com.example.android.androidquizapp.question.OnQuestionPassedListener;
+import com.example.android.androidquizapp.question.OnQuestionAttemptedListener;
 import com.example.android.androidquizapp.question.Question;
 
 import org.json.JSONArray;
@@ -14,7 +14,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.util.ArrayList;
@@ -27,10 +26,7 @@ import static com.example.android.androidquizapp.utils.QueryUtils.StorageMode.IN
  * Created by Android on 20-12-2017.
  */
 
-public class QueryUtils {
-
-    //Level data persistent file name static placeholder.
-    private static final String JSON_DATA_FILE = "questions.json";
+public final class QueryUtils {
 
     //Type of file storage mode.
     enum StorageMode{
@@ -45,54 +41,28 @@ public class QueryUtils {
      */
     private QueryUtils(){}
 
+
+
     /**
-     *
-     * The jsonFileToJSONObject method help us get a JSONObject from
-     * a JSON string stored on a json file.
-     * You need to declare a storage mode using QueryUtils.StorageMode.INTERNAL to use
-     * json internal file or QueryUtils.StorageMode.External to use the external json file.
+     * The writePersistentJSONFile method is used to write persistent JSON data
+     * to a file on private app data folder.
      *
      * @param context - The application context.
-     * @param mode . The storage.
+     * @param jsonObject - A JSONObject to write.
+     * @throws IOException - Input / Output exceptions is thrown.
      *
-     * @return JSONObject - A JSONObject representing the level questions.
-     */
-    private static JSONObject jsonFileToJSONObject(Context context, StorageMode mode) throws IOException, JSONException{
-
-        //An input stream to help us read json files
-        InputStream inputStream = null;
-
-        //Verify the storage mode
-        switch(mode){
-            case INTERNAL: inputStream = context.getAssets().open(JSON_DATA_FILE); break;
-            case EXTERNAL: inputStream = context.openFileInput(JSON_DATA_FILE);    break;
-        }
-
-        int size = inputStream.available();//The number of bytes that can be read from this input stream
-        byte[] buffer = new byte[size];
-        inputStream.read(buffer);
-        inputStream.close();
-
-        String jsonString = new String(buffer, "UTF-8");
-        return new JSONObject(jsonString);
-    }
-
-    /**
-     *
-     * @param context
-     * @param jsonObject
-     * @throws IOException
+     * @see IOException
      */
     private static void writePersistentJSONFile(Context context, JSONObject jsonObject) throws  IOException{
 
-            OutputStream fileOut = context.openFileOutput(JSON_DATA_FILE, Context.MODE_PRIVATE);
+            OutputStream fileOut = context.openFileOutput(JsonUtils.JSON_DATA_FILE, Context.MODE_PRIVATE);
             OutputStreamWriter writer = new OutputStreamWriter(fileOut, "UTF-8");
             writer.write(jsonObject.toString());
             writer.close();
     }
 
     public static void createPersistentData(Context context, int levelNameResourceArray) throws  IOException, JSONException{
-        JSONObject questionsObject = jsonFileToJSONObject(context, INTERNAL);
+        JSONObject questionsObject = JsonUtils.jsonFileToJSONObject(context, INTERNAL);
         String[] levelNameArray = context.getResources().getStringArray(levelNameResourceArray);
 
         //Create default question state values
@@ -102,6 +72,7 @@ public class QueryUtils {
             int numQuestions = level.length();
             for (int i = 0; i < numQuestions; i++) {
                 level.getJSONObject(i).put("passed", false);
+                level.getJSONObject(i).put("wrongAnswers", 0);
             }
         }
 
@@ -120,14 +91,14 @@ public class QueryUtils {
 
         try{
             //Create a JSON object to deal with question data
-            JSONObject jsonObject = jsonFileToJSONObject(context, EXTERNAL);
+            JSONObject jsonObject = JsonUtils.jsonFileToJSONObject(context, EXTERNAL);
             JSONArray questionArray = jsonObject.getJSONArray(level.toLowerCase());
 
             int numberOfQuestions = questionArray.length();
             for(int i = 0; i < numberOfQuestions; i++){
                 JSONObject jsonQuestion = questionArray.getJSONObject(i);
 
-                questionList.add(convertJsonObjectToQuestionObject(jsonQuestion));
+                questionList.add(JsonUtils.convertJsonObjectToQuestionObject(jsonQuestion));
 
             }
 
@@ -141,46 +112,16 @@ public class QueryUtils {
         return questionList;
     }
 
-    /**
-     * The private convertJsonObjectToQuestionObject method helps converting a JSON object into a Question object.
-     *
-     * @param jsonQuestion - A {@link JSONObject}.
-     *
-     * @return Question - A {@link Question} object.
-     *
-     * @throws JSONException - A {@link JSONException} if something wrong happen with JSON process.
-     *
-     * @see Question
-     */
-    private static Question convertJsonObjectToQuestionObject(JSONObject jsonQuestion) throws JSONException {
-
-        JSONArray possibleAnswersArray = jsonQuestion.getJSONArray("options");
-        String question = jsonQuestion.getString("question");
-        String tip = jsonQuestion.getJSONArray("tip").getString(0);
-        boolean passed = jsonQuestion.getBoolean("passed");
-
-        int numberOfPossibleAnswers = possibleAnswersArray.length();
-
-        String[] possibleAnswers = new String[numberOfPossibleAnswers];
-        boolean[] rightAnswersIndex = new boolean[numberOfPossibleAnswers];
-
-        for (int i = 0; i < numberOfPossibleAnswers; i++) {
-            possibleAnswers[i] = possibleAnswersArray.getJSONArray(i).getString(0);
-            rightAnswersIndex[i] = possibleAnswersArray.getJSONArray(i).getBoolean(1);
-        }
-
-        return new Question(question, tip, possibleAnswers, rightAnswersIndex, passed).addOnQuestionPassedListener(new SaveOnQuestionPassedListener());
-    }
 
     /**
-     * The {@link SaveOnQuestionPassedListener} class is used to save passed question persistent state, this is possible trough the implementation of {@link OnQuestionPassedListener}.
-     * The persistent question data is saved when this class receives a callback from {@link OnQuestionPassedListener} trough the override method onQuestionPassed().
+     * The {@link SaveOnQuestionAttemptedListener} class is used to save passed question persistent state, this is possible trough the implementation of {@link OnQuestionAttemptedListener}.
+     * The persistent question data is saved when this class receives a callback from {@link OnQuestionAttemptedListener} trough the override method onQuestionPassed().
      */
-    private static class SaveOnQuestionPassedListener implements OnQuestionPassedListener{
+    public static class SaveOnQuestionAttemptedListener implements OnQuestionAttemptedListener {
 
-        public SaveOnQuestionPassedListener(){}
+        public SaveOnQuestionAttemptedListener(){}
 
-        protected SaveOnQuestionPassedListener(Parcel in) {
+        protected SaveOnQuestionAttemptedListener(Parcel in) {
         }
 
         @Override
@@ -192,15 +133,15 @@ public class QueryUtils {
             return 0;
         }
 
-        public static final Creator<SaveOnQuestionPassedListener> CREATOR = new Creator<SaveOnQuestionPassedListener>() {
+        public static final Creator<SaveOnQuestionAttemptedListener> CREATOR = new Creator<SaveOnQuestionAttemptedListener>() {
             @Override
-            public SaveOnQuestionPassedListener createFromParcel(Parcel in) {
-                return new SaveOnQuestionPassedListener(in);
+            public SaveOnQuestionAttemptedListener createFromParcel(Parcel in) {
+                return new SaveOnQuestionAttemptedListener(in);
             }
 
             @Override
-            public SaveOnQuestionPassedListener[] newArray(int size) {
-                return new SaveOnQuestionPassedListener[size];
+            public SaveOnQuestionAttemptedListener[] newArray(int size) {
+                return new SaveOnQuestionAttemptedListener[size];
             }
         };
 
@@ -214,11 +155,30 @@ public class QueryUtils {
         @Override
         public void onQuestionPassed(Context context, @NonNull Level level, int questionIndex) {
             try {
-                JSONObject jsonQuestionsObject = jsonFileToJSONObject(context, StorageMode.EXTERNAL);
+                JSONObject jsonQuestionsObject = JsonUtils.jsonFileToJSONObject(context, StorageMode.EXTERNAL);
                 JSONArray jsonQuestionsArray = jsonQuestionsObject.getJSONArray(level.getName().toLowerCase());
 
                 //Update question passed state.
                 jsonQuestionsArray.getJSONObject(questionIndex).put("passed", true);
+
+                //Write persistent data.
+                writePersistentJSONFile(context, jsonQuestionsObject);
+
+            }catch(IOException | JSONException e){e.printStackTrace();}
+        }
+
+        @Override
+        public void onQuestionFailed(Context context, @NonNull Level level, int questionIndex) {
+            //Increment wrong answers.
+            try {
+                JSONObject jsonQuestionsObject = JsonUtils.jsonFileToJSONObject(context, StorageMode.EXTERNAL);
+                JSONArray jsonQuestionsArray = jsonQuestionsObject.getJSONArray(level.getName().toLowerCase());
+
+                int wrongAnswers = jsonQuestionsArray.getJSONObject(questionIndex).getInt("wrongAnswers");
+                wrongAnswers++;
+
+                //Update question passed state.
+                jsonQuestionsArray.getJSONObject(questionIndex).put("wrongAnswers", wrongAnswers);
 
                 //Write persistent data.
                 writePersistentJSONFile(context, jsonQuestionsObject);
@@ -236,7 +196,7 @@ public class QueryUtils {
     public static void cleanProgress(Context context, Collection<Level> levels){
         try{
             //JSON main object containing all level questions.
-            JSONObject jsonQuestionsObject = jsonFileToJSONObject(context, StorageMode.EXTERNAL);
+            JSONObject jsonQuestionsObject = JsonUtils.jsonFileToJSONObject(context, StorageMode.EXTERNAL);
 
             //Iterate over all levels.
             for (Level level: levels) {
@@ -250,6 +210,7 @@ public class QueryUtils {
                 for (int i = 0; i < numQuestion; i++) {
                     //Update question passed state to false.
                     jsonQuestionsArray.getJSONObject(i).put("passed", false);
+                    jsonQuestionsArray.getJSONObject(i).put("wrongAnswers", 0);
                 }
 
             }
