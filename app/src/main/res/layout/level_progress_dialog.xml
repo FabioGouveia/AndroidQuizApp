@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -18,7 +19,7 @@
         android:paddingLeft="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="Your progress: 0%"/>
+        tools:text="Your progress: 0%"/>
 
 
     <TextView
@@ -30,6 +31,6 @@
         android:paddingLeft="16dp"
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
-        android:text="Wrong answers: 20"/>
+        tools:text="Wrong answers: 3"/>
 
 </LinearLayout>
