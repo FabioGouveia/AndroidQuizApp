@@ -23,16 +23,20 @@ import com.example.android.androidquizapp.utils.DialogUtils;
 
 public class QuestionsActivity extends AppCompatActivity {
 
+    public static int NUMBER_OF_WRONG_ANSWERS;
+
     private Level level;
-    public static ViewPager QUESTION_VIEW_PAGER;
+    private ViewPager questionsViewPager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
+        //Get bundle from Intent call.
         Bundle bundle = getIntent().getExtras();
 
+        //Get the supported action bar.
         ActionBar actionBar = getSupportActionBar();
 
 
@@ -52,15 +56,18 @@ public class QuestionsActivity extends AppCompatActivity {
             actionBar.setTitle(level.getName());
         }
 
+        //Initialize static number of wrong questions
+        NUMBER_OF_WRONG_ANSWERS = level.getTotalWrongAnswers();
+
         //Initialize our view pager to hold our questions
-        QUESTION_VIEW_PAGER = findViewById(R.id.questions_view_pager);
+        questionsViewPager = findViewById(R.id.questions_view_pager);
         TabLayout questionTab = findViewById(R.id.questions_tab);
 
         //Instantiate a question adapter to deal with level questions
         QuestionAdapter questionAdapter = new QuestionAdapter(this, getSupportFragmentManager(), level);
 
-        QUESTION_VIEW_PAGER.setAdapter(questionAdapter);
-        questionTab.setupWithViewPager(QUESTION_VIEW_PAGER);
+        questionsViewPager.setAdapter(questionAdapter);
+        questionTab.setupWithViewPager(questionsViewPager);
 
     }
 
@@ -85,6 +92,8 @@ public class QuestionsActivity extends AppCompatActivity {
                 Bundle statisticsBundle = new Bundle();
                 statisticsBundle.putString(DialogUtils.LEVEL_PROGRESS_TITLE_KEY, level.getName());
                 statisticsBundle.putInt(DialogUtils.LEVEL_PROGRESS_SCORE_KEY, level.getScore());
+                statisticsBundle.putInt(DialogUtils.LEVEL_PROGRESS_QUESTIONS_PASSED_KEY, level.getNumberOfPassedQuestions());
+                statisticsBundle.putInt(DialogUtils.LEVEL_PROGRESS_WRONG_ANSWER_KEY, NUMBER_OF_WRONG_ANSWERS);
 
                 DialogUtils levelProgressDialog = new DialogUtils();
                 levelProgressDialog.setType(DialogUtils.Type.LEVEL_PROGRESS_DIALOG);
@@ -119,6 +128,16 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onBackPressed();
         //Animate the activity transition
         animateBackActivityTransition();
+    }
+
+    /**
+     * This method changes the question to the next question if exists.
+     */
+    public void viewPagerNextQuestion(){
+        int currentQuestion = questionsViewPager.getCurrentItem();
+
+        if(currentQuestion < level.getNumberOfQuestions())
+            questionsViewPager.setCurrentItem(currentQuestion + 1,true);
     }
 
     //This method help us overriding android pending transitions between activities when leave this activity to the level selection activity.
