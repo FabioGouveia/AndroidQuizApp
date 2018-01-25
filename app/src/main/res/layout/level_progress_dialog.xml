@@ -12,25 +12,36 @@
 
     <TextView
         android:id="@+id/progress_dialog_progress_text_view"
-        android:textAppearance="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
         android:paddingLeft="16dp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:textAppearance="?android:textAppearanceSmall"
         tools:text="Your progress: 0%"/>
+
+    <TextView
+        android:id="@+id/progress_dialog_passed_questions_text_view"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingEnd="16dp"
+        android:paddingLeft="16dp"
+        android:paddingStart="16dp"
+        android:paddingTop="16dp"
+        android:textAppearance="?android:textAppearanceSmall"
+        tools:text="Passed questions: 6" />
 
 
     <TextView
         android:id="@+id/progress_dialog_wrong_answers_text_view"
-        android:textAppearance="?android:textAppearanceSmall"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="16dp"
+        android:paddingEnd="16dp"
         android:paddingLeft="16dp"
         android:paddingStart="16dp"
-        android:paddingEnd="16dp"
+        android:paddingTop="16dp"
+        android:textAppearance="?android:textAppearanceSmall"
         tools:text="Wrong answers: 3"/>
 
 </LinearLayout>
