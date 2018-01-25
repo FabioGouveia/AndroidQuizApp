@@ -16,22 +16,32 @@ public class Question implements Parcelable {
 
     //Class members
     public final static String QUESTION_KEY = "question";
+    //Parcelable implementation
+    public static final Creator<Question> CREATOR = new Creator<Question>() {
+        @Override
+        public Question createFromParcel(Parcel in) {
+            return new Question(in);
+        }
 
-    enum Type{ONE_CHOICE, MULTIPLE_CHOICE, TEXTUAL}
-
-
+        @Override
+        public Question[] newArray(int size) {
+            return new Question[size];
+        }
+    };
     //Instance members
     private String question, questionTip;
     private String[] possibleAnswers;
+    private int wrongAnswers;
     private boolean[] rightAnswersState;
     private boolean passed;
-    private OnQuestionPassedListener onQuestionPassedListener;
+    private OnQuestionAttemptedListener onQuestionAttemptedListener;
 
     //Question object constructor
-    public Question(String question, String questionTip, String[] possibleAnswers, boolean[] rightAnswersState, boolean passed) {
+    public Question(String question, String questionTip, String[] possibleAnswers, boolean[] rightAnswersState, boolean passed, int wrongAnswers) {
         this.question = question;
         this.questionTip = questionTip;
         this.possibleAnswers = possibleAnswers;
+        this.wrongAnswers = wrongAnswers;
         this.rightAnswersState = rightAnswersState;
         this.passed = passed;
     }
@@ -40,9 +50,10 @@ public class Question implements Parcelable {
         question = in.readString();
         questionTip = in.readString();
         possibleAnswers = in.createStringArray();
+        wrongAnswers = in.readInt();
         rightAnswersState = in.createBooleanArray();
         passed = in.readByte() != 0;
-        onQuestionPassedListener = in.readParcelable(getClass().getClassLoader());
+        onQuestionAttemptedListener = in.readParcelable(getClass().getClassLoader());
     }
 
     /**
@@ -93,7 +104,9 @@ public class Question implements Parcelable {
     boolean checkAnswer(Context context, Level level, int questionIndex, boolean[] answerState){
 
         if(passed = Arrays.equals(answerState, rightAnswersState)){
-            onQuestionPassedListener.onQuestionPassed(context, level, questionIndex);
+            onQuestionAttemptedListener.onQuestionPassed(context, level, questionIndex);
+        } else {
+            onQuestionAttemptedListener.onQuestionFailed(context, level, questionIndex);
         }
 
         return passed;
@@ -101,14 +114,24 @@ public class Question implements Parcelable {
 
     //TODO: Comment this method...
     boolean checkAnswer(Context context, Level level, int questionIndex, String textualAnswer){
+        //Count possible answers.
         String[] possibleCorrectAnswers = possibleAnswers[0].split(",");
 
+        //Read all the possible answers.
         for (String possibleCorrectAnswer : possibleCorrectAnswers) {
             passed = textualAnswer.trim().equalsIgnoreCase(possibleCorrectAnswer.trim());
+            //If answer is correct...
             if(passed){
-                onQuestionPassedListener.onQuestionPassed(context, level, questionIndex);
+                //Call passed...Yeahhh
+                //and stop the loop
+                onQuestionAttemptedListener.onQuestionPassed(context, level, questionIndex);
                 break;
             }
+        }
+
+        //If is the wrong answer. :(
+        if (!passed) {
+            onQuestionAttemptedListener.onQuestionFailed(context, level, questionIndex);
         }
 
         return passed;
@@ -124,24 +147,15 @@ public class Question implements Parcelable {
         return passed;
     }
 
-    //TODO: Comment this method
-    public Question addOnQuestionPassedListener(OnQuestionPassedListener onQuestionPassedListener){
-        this.onQuestionPassedListener = onQuestionPassedListener;
-        return this;
+    public int getWrongAnswers() {
+        return wrongAnswers;
     }
 
-    //Parcelable implementation
-    public static final Creator<Question> CREATOR = new Creator<Question>() {
-        @Override
-        public Question createFromParcel(Parcel in) {
-            return new Question(in);
-        }
-
-        @Override
-        public Question[] newArray(int size) {
-            return new Question[size];
-        }
-    };
+    //TODO: Comment this method
+    public Question addOnQuestionPassedListener(OnQuestionAttemptedListener onQuestionAttemptedListener) {
+        this.onQuestionAttemptedListener = onQuestionAttemptedListener;
+        return this;
+    }
 
     @Override
     public int describeContents() {
@@ -149,18 +163,22 @@ public class Question implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(question);
-        dest.writeString(questionTip);
-        dest.writeStringArray(possibleAnswers);
-        dest.writeBooleanArray(rightAnswersState);
-        dest.writeByte((byte) (passed ? 1 : 0));
-        dest.writeParcelable(onQuestionPassedListener, 0);
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(question);
+        parcel.writeString(questionTip);
+        parcel.writeStringArray(possibleAnswers);
+        parcel.writeInt(wrongAnswers);
+        parcel.writeBooleanArray(rightAnswersState);
+        parcel.writeByte((byte) (passed ? 1 : 0));
+        parcel.writeParcelable(onQuestionAttemptedListener, 0);
     }
 
-    //This method resets the progress
+    //This method resets the progress.
     public void resetProgress(){
         passed = false;
+        wrongAnswers = 0;
     }
+
+    enum Type {ONE_CHOICE, MULTIPLE_CHOICE, TEXTUAL}
 
 }
