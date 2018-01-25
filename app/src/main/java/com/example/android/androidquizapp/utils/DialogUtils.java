@@ -20,27 +20,12 @@ public class DialogUtils extends DialogFragment {
 
     public static final String LEVEL_PROGRESS_TITLE_KEY = "level_title_key";
     public static final String LEVEL_PROGRESS_SCORE_KEY = "level_score_key";
+    public static final String LEVEL_PROGRESS_QUESTIONS_PASSED_KEY = "questions_passed_key";
     public static final String LEVEL_PROGRESS_WRONG_ANSWER_KEY = "level_attempts_key";
     public static final String CONFIRM_DIALOG_MESSAGE_KEY = "msg_key";
 
     private Type type;
     private OnPositiveButtonClickedListener listener;
-
-    public enum Type{
-        LEVEL_PROGRESS_DIALOG,
-        CONFIRM_DIALOG
-    }
-
-    public interface OnPositiveButtonClickedListener{
-        void onPositiveButtonClicked();
-    }
-
-    //Inner class to deal with dialog exceptions.
-    public class DialogException extends Exception{
-        DialogException(String e){
-            super(e);
-        }
-    }
 
     /**
      * The setType method set up the dialog type.
@@ -118,15 +103,19 @@ public class DialogUtils extends DialogFragment {
 
        //Bundle arguments.
         int progress = getArguments().getInt(LEVEL_PROGRESS_SCORE_KEY);
+        int questionsPassed = getArguments().getInt(LEVEL_PROGRESS_QUESTIONS_PASSED_KEY);
         int wrongAnswers = getArguments().getInt(LEVEL_PROGRESS_WRONG_ANSWER_KEY);
 
+        //Convert to string
         String progressString = String.format(getResources().getString(R.string.your_progress), progress);
+        String questionsPassedString = String.format(getResources().getString(R.string.questions_passed), questionsPassed);
         String wrongAnswersString = String.format(getResources().getString(R.string.wrong_answers), wrongAnswers);
 
         //Inflate the dialog.
         View dialogLayout = getActivity().getLayoutInflater().inflate(R.layout.level_progress_dialog, null);
         ((ProgressBar) dialogLayout.findViewById(R.id.progress_dialog_progressBar)).setProgress(progress);
         ((TextView) dialogLayout.findViewById(R.id.progress_dialog_progress_text_view)).setText(progressString);
+        ((TextView) dialogLayout.findViewById(R.id.progress_dialog_passed_questions_text_view)).setText(questionsPassedString);
         ((TextView) dialogLayout.findViewById(R.id.progress_dialog_wrong_answers_text_view)).setText(wrongAnswersString);
 
         builder.setTitle(String.format(getResources().getString(R.string.level_progress_dialog_title), getArguments().getString(LEVEL_PROGRESS_TITLE_KEY)))
@@ -139,5 +128,21 @@ public class DialogUtils extends DialogFragment {
                 }).setNegativeButton(R.string.cancel_dialog, null);
 
         return builder;
+    }
+
+    public enum Type {
+        LEVEL_PROGRESS_DIALOG,
+        CONFIRM_DIALOG
+    }
+
+    public interface OnPositiveButtonClickedListener {
+        void onPositiveButtonClicked();
+    }
+
+    //Inner class to deal with dialog exceptions.
+    public class DialogException extends Exception {
+        DialogException(String e) {
+            super(e);
+        }
     }
 }
