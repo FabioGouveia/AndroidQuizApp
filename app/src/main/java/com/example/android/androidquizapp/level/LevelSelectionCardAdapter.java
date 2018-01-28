@@ -38,29 +38,10 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
     private Context context;
     private ArrayList<Level> levels;
 
+    //Constructor
     LevelSelectionCardAdapter(Context context, ArrayList<Level> levels){
         this.context = context;
         this.levels = levels;
-    }
-
-    static class ViewHolder extends RecyclerView.ViewHolder{
-
-        private CardView rootView;
-        private RelativeLayout cardHeader;
-        private TextView level, levelEarnings, numberOfQuestions, footerTextView;
-        private ImageView levelIcon;
-
-        private ViewHolder(View itemView){
-            super(itemView);
-
-            rootView = (CardView) itemView.getRootView();
-            cardHeader = itemView.findViewById(R.id.card_header);
-            level = itemView.findViewById(R.id.level_text_view);
-            levelEarnings = itemView.findViewById(R.id.level_earnings_text_view);
-            numberOfQuestions = itemView.findViewById(R.id.number_of_questions_text_view);
-            levelIcon = itemView.findViewById(R.id.level_icon);
-            footerTextView = itemView.findViewById(R.id.footer_text_view);
-        }
     }
 
     @Override
@@ -75,11 +56,13 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
     @Override
     public void onBindViewHolder(final ViewHolder holder, int position) {
 
+        //Get the Level from levels ArrayList
         final Level level = levels.get(position);
 
         //Get application resources.
         Resources resources = context.getResources();
 
+        //Basically in this step we copy the values we want to display from the level into the views on the holder.
         holder.level.setText(level.getName());
         holder.levelIcon.setImageResource(getIconResourceId(level, position));
 
@@ -101,18 +84,20 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
             holder.footerTextView.setBackground(resources.getDrawable(R.drawable.level_card_footer_bgd_disabled));
         }
 
+        //Listen the clicks in the cards
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //If level enabled allow the user to navigate into questions activity.
                 if(level.isUnlocked(levels, holder.getAdapterPosition())){
 
+                    //Intent to start a question activity with an extra level on it.
                     final Intent intent = new Intent(context, QuestionsActivity.class);
                     intent.putExtra(Level.LEVEL_KEY, level);
-
+                    //Start the activity with an intent.
                     context.startActivity(intent);
 
-                    //Cast context to Activity so we can override activity pending transition
+                    //Cast context to Activity so we can override activity pending transition.
                     ((Activity) context).overridePendingTransition(R.anim.enter_activity_animation, R.anim.exit_activity_animation);
 
                 }else{
@@ -124,6 +109,11 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
         });
     }
 
+    /**
+     * When this method is called returns the number of levels stored in levels array.
+     *
+     * @return Integer - The number of levels.
+     */
     @Override
     public int getItemCount() {
         return levels.size();
@@ -146,5 +136,27 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
 
         //TODO: complete this comment...
         return (level.isUnlocked(levels, position)) ? iconResId : iconDisabledResId;
+    }
+
+    //Static inner class to hold de CardViews
+    //@see RecyclerView.ViewHolder
+    static class ViewHolder extends RecyclerView.ViewHolder {
+
+        private CardView rootView;
+        private RelativeLayout cardHeader;
+        private TextView level, levelEarnings, numberOfQuestions, footerTextView;
+        private ImageView levelIcon;
+
+        private ViewHolder(View itemView) {
+            super(itemView);
+
+            rootView = (CardView) itemView.getRootView();
+            cardHeader = itemView.findViewById(R.id.card_header);
+            level = itemView.findViewById(R.id.level_text_view);
+            levelEarnings = itemView.findViewById(R.id.level_earnings_text_view);
+            numberOfQuestions = itemView.findViewById(R.id.number_of_questions_text_view);
+            levelIcon = itemView.findViewById(R.id.level_icon);
+            footerTextView = itemView.findViewById(R.id.footer_text_view);
+        }
     }
 }
