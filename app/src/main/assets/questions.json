@@ -218,7 +218,7 @@
       ]
     },
     {
-      "question" : "Which static method from the class MediaPlayer we have to call in order to use an instance of MediaPlayer class ?",
+      "question": "Which static method from the class MediaPlayer we can call in order to get an instance of MediaPlayer class ?",
       "options" : [
         ["create,create(),create method,create() method,the create method,MediaPlayer.create,MediaPlayer.create(),MediaPlayer.create method,MediaPlayer.create() method,the MediaPlayer.create method", true]
       ],
@@ -234,7 +234,7 @@
         ["false", false]
       ],
       "tip" : [
-        "<b>A convenience method to check if a MediaPlayer is playing or not.",
+        "A convenience method to check if a MediaPlayer is playing or not.",
         "https://developer.android.com/reference/android/media/MediaPlayer.html#isPlaying()"
       ]
     }
@@ -354,8 +354,7 @@
         "The word pending says everything.",
         "https://developer.android.com/guide/topics/ui/layout/gridview.html"
       ]
-    }
-  ,
+    },
     {
       "question" : "if you need to create a preferences file that only refers to an activity, what method should we use ?",
       "options" : [
@@ -403,7 +402,10 @@
         ["Binary large object", true],
         ["Bit low object", false],
         ["Bytes less object", false],
-        ["binary low object", false]
+        [
+          "Binary low object",
+          false
+        ]
       ],
       "tip" : [
         "The word pending says everything.",
