@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="16dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/failed_question_toast_bgd"
+        android:padding="8dp">
+
+        <ImageView
+            android:id="@+id/toast_failed_image_view"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:contentDescription="@string/failed_question_content_description"
+            tools:src="@drawable/ic_failed_beginner_question" />
+
+        <TextView
+            android:id="@+id/toast_failed_title_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/toast_failed_image_view"
+            android:layout_toRightOf="@id/toast_failed_image_view"
+            android:padding="3dp"
+            android:text="@string/failed_question_toast_title"
+            android:textAllCaps="true"
+            android:textColor="@color/colorFailedQuestion"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/toast_failed_text_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toast_failed_title_view"
+            android:layout_toEndOf="@id/toast_failed_image_view"
+            android:layout_toRightOf="@id/toast_failed_image_view"
+            android:padding="3dp"
+            tools:text="An IDE is where you write your code." />
+
+        <TextView
+            android:id="@+id/toast_failed_link_view"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/toast_failed_text_view"
+            android:layout_toEndOf="@id/toast_failed_image_view"
+            android:layout_toRightOf="@id/toast_failed_image_view"
+            android:autoLink="web"
+            android:padding="3dp"
+            tools:text="https://www.quora.com/What-are-the-meanings-of-IDE-API-APT-SDK-and-APK-in-Android-development" />
+
+    </RelativeLayout>
+</FrameLayout>
