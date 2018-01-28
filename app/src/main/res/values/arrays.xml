@@ -63,11 +63,20 @@
         <item>@drawable/professional_level_icon</item>
         <item>@drawable/advanced_level_icon</item>
     </array>
+
     <array name="level_card_icon_disabled">
         <item>null</item><!-- the first level is never disabled -->
         <item>@drawable/amateur_level_icon_disabled</item>
         <item>@drawable/professional_level_icon_disabled</item>
         <item>@drawable/advanced_level_icon_disabled</item>
+    </array>
+
+    <!-- Failed questions alert icon -->
+    <array name="failed_question_icon">
+        <item>@drawable/ic_failed_beginner_question</item>
+        <item>@drawable/ic_failed_amateur_question</item>
+        <item>@drawable/ic_failed_professional_question</item>
+        <item>@drawable/ic_failed_advanced_question</item>
     </array>
 
 </resources>
