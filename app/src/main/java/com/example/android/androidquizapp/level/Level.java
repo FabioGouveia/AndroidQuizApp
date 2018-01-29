@@ -24,9 +24,25 @@ public class Level implements Parcelable {
 
     //Class members
     public final static String LEVEL_KEY = "level";
+    /*
+     * Parcelable implementation below, see documentation android.os.Parcelable and android.os.Parcel classes.
+     *
+     * The implementation below help us when we need to pass objects through activities.
+     */
+    public static final Creator<Level> CREATOR = new Creator<Level>() {
+        @Override
+        public Level createFromParcel(Parcel in) {
+            return new Level(in);
+        }
 
+        @Override
+        public Level[] newArray(int size) {
+            return new Level[size];
+        }
+    };
     //Instance members
     private String name, earnings, requiredToUnlock;
+    private int failedQuestionIcon;
     private double percentageRequiredToPass;
     private ArrayList<Question> questions;
 
@@ -41,12 +57,13 @@ public class Level implements Parcelable {
      *
      * @see Question
      */
-    public Level(String name, String earnings, String requiredToUnlock, int percentageRequiredToPass, ArrayList<Question> questions){
+    public Level(String name, String earnings, String requiredToUnlock, int percentageRequiredToPass, ArrayList<Question> questions, int failedQuestionIcon) {
         this.name = name;
         this.earnings = earnings;
         this.requiredToUnlock = requiredToUnlock;
         this.percentageRequiredToPass = percentageRequiredToPass;//Implicit cast "int 32 bits to double 64 bits"
         this.questions = questions;
+        this.failedQuestionIcon = failedQuestionIcon;
     }
 
     /**
@@ -66,6 +83,8 @@ public class Level implements Parcelable {
         //Create an ArrayList to store the question loaded through a Parcel
         questions = new ArrayList<>();
         in.readList(questions, Question.class.getClassLoader());
+
+        failedQuestionIcon = in.readInt();
     }
 
     /**
@@ -117,6 +136,15 @@ public class Level implements Parcelable {
         return questions.get(index);
     }
 
+    public int getTotalWrongAnswers() {
+        int wrongAnswers = 0;
+        for (Question question : questions) {
+            wrongAnswers += question.getWrongAnswers();
+        }
+
+        return wrongAnswers;
+    }
+
     /**
      * The getEarnings method allow us to get the level earnings.
      *
@@ -140,8 +168,9 @@ public class Level implements Parcelable {
         return percentageRequiredToPass;
     }
 
-
-
+    public int getFailedQuestionIconResource() {
+        return failedQuestionIcon;
+    }
 
     /**
      * The getScore method allow us to get the score made in this level.
@@ -169,6 +198,10 @@ public class Level implements Parcelable {
         return position == 0 || levels.get(position-1).getScore() >= levels.get(position-1).getPercentageRequiredToPass();
     }
 
+    public boolean isPassed() {
+        return getScore() >= getPercentageRequiredToPass();
+    }
+
     //Private method to process the score
     private int processScore(){
 
@@ -186,27 +219,9 @@ public class Level implements Parcelable {
         return score;
     }
 
-
     //Private method to help us know the value per question in percentage.
     private int percentagePerQuestion(){
         return questions.size() <= 100 ? 100 / questions.size() : (int)(questions.size() * 0.100f);}
-
-    /*
-     * Parcelable implementation below, see documentation android.os.Parcelable and android.os.Parcel classes.
-     *
-     * The implementation below help us when we need to pass objects through activities.
-     */
-    public static final Creator<Level> CREATOR = new Creator<Level>() {
-        @Override
-        public Level createFromParcel(Parcel in) {
-            return new Level(in);
-        }
-
-        @Override
-        public Level[] newArray(int size) {
-            return new Level[size];
-        }
-    };
 
     @Override
     public int describeContents() {
@@ -220,5 +235,6 @@ public class Level implements Parcelable {
         dest.writeString(requiredToUnlock);
         dest.writeDouble(percentageRequiredToPass);
         dest.writeList(questions);
+        dest.writeInt(failedQuestionIcon);
     }
 }
