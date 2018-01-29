@@ -12,7 +12,6 @@
         <item name="android:windowDisablePreview">true</item>
         <item name="overlapAnchor">false</item>
         <item name="android:dropDownVerticalOffset">5.0dp</item>
-        <!--<item name="android:popupBackground">#FFF</item>-->
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -61,8 +60,9 @@
         <item name="android:layout_height">@dimen/progressbar_thin_height</item>
     </style>
 
-    <!-- TODO: change hardcoded colors -->
-    <!-- Style for a tab that displays a question number -->
+    <!-- Question styles -->
+
+    <!-- Style for a question tabs -->
     <style name="QuestionTab" parent="Widget.Design.TabLayout">
         <item name="tabBackground">@color/colorPrimaryLight</item>
         <item name="tabIndicatorColor">@color/colorPrimaryDark</item>
@@ -72,6 +72,66 @@
         <item name="tabIndicatorHeight">2dp</item>
         <item name="tabTextAppearance">@style/QuestionTabTextAppearance</item>
     </style>
+    <!-- Question header divider -->
+    <style name="QuestionHeaderDivider">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/question_header_divider_height</item>
+        <item name="android:layout_below">@id/question_text_view</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+    <!-- Multiple choice hint -->
+    <style name="MultipleChoiceHint">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">@dimen/answers_holder_margin</item>
+        <item name="android:layout_marginTop">@dimen/multiple_choice_hint_margin_top</item>
+        <item name="android:layout_below">@id/question_text_view</item>
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:text">@string/multiple_choice_hint</item>
+        <item name="android:visibility">gone</item>
+    </style>
+    <!-- Answers holder -->
+    <style name="AnswersHolder">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/question_text_view</item>
+        <item name="android:layout_marginLeft">@dimen/answers_holder_margin</item>
+        <item name="android:layout_marginTop">@dimen/answers_holder_margin</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="AnswersHolder.checkBox">
+        <item name="android:layout_marginTop">@dimen/answers_holder_checkbox_margin_top</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+    <!-- Answer button -->
+    <style name="AnswerButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginBottom">@dimen/answer_button_margin_bottom</item>
+        <item name="android:text">@string/btn_answer</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+    <!-- Passed question label style -->
+    <style name="PassedQuestionLabel">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:layout_marginBottom">@dimen/passed_question_label_margin_bottom</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPassedQuestion</item>
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:text">@string/passed_question_label</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- Question Tabs style -->
 
     <!-- Text appearance style for a category tab -->
     <style name="QuestionTabTextAppearance" parent="TextAppearance.Design.Tab">
