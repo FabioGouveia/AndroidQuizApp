@@ -8,13 +8,6 @@
     <string name="show_question_progress">Show question progress</string>
     <string name="clean_level_progress">Clean level progress</string>
 
-    <!-- Dialogs strings -->
-    <string name="level_progress_dialog_title">%1$s level progress</string>
-    <string name="your_progress">Your progress %1$d %%</string>
-    <string name="show_statistics">Go to statistics</string>
-    <string name="cancel_dialog">Cancel</string>
-    <string name="clean_progress">Clean</string>
-
     <!-- Intro animation strings -->
     <string-array name="intro_text">
         <item>Welcome to Android Quiz App</item>
@@ -35,13 +28,25 @@
 
     <!-- Question strings -->
     <string name="question_label">Question</string>
-
-    <!-- Answer strings -->
+    <string name="multiple_choice_hint">This is a multiple choice question</string>
+    <string name="textual_answer_hint">Type your answer here&#8230;</string>
     <string name="passed_question_label">Passed</string>
-    <string name="failed_question_tip">Tip:\n %1$s</string>
+    <string name="failed_question_toast_title">Oops&#8230; Try again!</string>
+    <string name="user_final_correct_textual_answer">Your answer was %1$s</string>
 
     <!-- Statistics strings -->
-    <string name="progress">Progress: %1$s</string>
-    <string name="passed_questions">Passed questions: %1$s</string>
+    <string name="your_progress">Your progress: %1$d %%</string>
+    <string name="wrong_answers">Wrong answers: %1$d</string>
+    <string name="questions_passed">Questions passed: %1$d</string>
+
+    <!-- Dialogs strings -->
+    <string name="level_passed_dialog_title">Congratulations</string>
+    <string name="level_passed_dialog_msg">You earned %1$s. Now you can start the next level and evolve your skills.</string>
+    <string name="level_progress_dialog_title">%1$s level progress</string>
+    <string name="show_statistics">Go to statistics</string>
+    <string name="cancel_dialog">Cancel</string>
+    <string name="clean_progress">Clean</string>
+    <string name="level_passed_dialog_ok_button">OK</string>
+    <string name="failed_question_content_description">Failed question icon</string>
 
 </resources>
