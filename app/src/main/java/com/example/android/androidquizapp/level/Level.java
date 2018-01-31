@@ -10,25 +10,28 @@ import java.util.ArrayList;
 
 /**
  * The class {@link Level} represents a difficulty level in game.
- * The level have unlimited number of questions.
+ * This level can have an unlimited number of questions.
  *
- * You can add more levels or remove as you want, see assets/questions.json and res/value/array.xml to find out how.
+ * <p>You can add or remove levels, questions, warnings, sonds, etc...
+ * Change the app has you want, sky is the limite, go to <b><strong>assets/questions.json</strong></b> and <b><strong>res/value/array.xml</strong></b> to find out how.
+ * </p>
  *
- * This class implements {@link Parcelable} so we can pass it trough Activities using a {@link android.content.Intent} and a {@link android.os.Bundle} object
+ * <p>This class implements {@link Parcelable} so we can pass it trough Activities using a {@link android.content.Intent} and a {@link android.os.Bundle} object</p>
  *
  * @author Fábio Gouveia
  * @version 1.0
+ * @see Parcelable
+ * @see Question
+ *
  */
 
 public class Level implements Parcelable {
 
     //Class members
     public final static String LEVEL_KEY = "level";
-    /*
-     * Parcelable implementation below, see documentation android.os.Parcelable and android.os.Parcel classes.
-     *
-     * The implementation below help us when we need to pass objects through activities.
-     */
+    /**
+     * Essential creator to create levels from parcels
+     **/
     public static final Creator<Level> CREATOR = new Creator<Level>() {
         @Override
         public Level createFromParcel(Parcel in) {
@@ -159,15 +162,20 @@ public class Level implements Parcelable {
      *
      * @return String - The textual representation of what is necessary to unlock this level.
      */
-    public String getRequiredToUnlock(){
+    String getRequiredToUnlock(){
         return requiredToUnlock;
     }
 
     //TODO: Comment this method...
-    public double getPercentageRequiredToPass(){
+    double getPercentageRequiredToPass(){
         return percentageRequiredToPass;
     }
 
+    /**
+     * Return the <tt>int</tt> representation for failed question icon resource.
+     *
+     * @return the <tt>int</tt> representation for failed question icon resource
+     */
     public int getFailedQuestionIconResource() {
         return failedQuestionIcon;
     }
@@ -182,32 +190,48 @@ public class Level implements Parcelable {
     }
 
     /**
-     * The isUnlocked method let us know if this level is locked or unlocked.
+     * Return {@boolean} representing the locked state, {@code true} if is unlocked and [@code false}
+     * if not.
      *
-     * @param levels - {@link ArrayList} of levels.
-     * @param position - The level position in this array.
-     * @return boolean - true if the level is unlocked and false if not.
+     * @param levels
+     *          {@link ArrayList} of levels.
+     *
+     * @param position
+     *          A {@code int} representing the level position in this array.
+     *
+     * @return {@code true} if the level is unlocked and {@code false} if not.
      *
      * @see ArrayList
      */
-    public boolean isUnlocked(ArrayList<Level> levels, int position){
+    boolean isUnlocked(ArrayList<Level> levels, int position){
         /*
-        If levelBefore it's the first level return true because first level is never locked, if not
-        return if level before score is higher then score required to pass.
+        If levelBefore it's the first level, return true because first level is never locked.
+        If not, return if the level before has been passed.
         */
         return position == 0 || levels.get(position-1).getScore() >= levels.get(position-1).getPercentageRequiredToPass();
     }
 
+    /**
+     * This method returns a {@code boolean} representation for this level passed state.
+     * Returns {@code true} if the level has been passed and {@code false} if not.
+     *
+     * @return <tt>boolean</tt> representing if the level has been passed
+     */
     public boolean isPassed() {
         return getScore() >= getPercentageRequiredToPass();
     }
 
-    //Private method to process the score
+    /**
+     * Return a {@code int} representing the score for this level.
+     *
+     * @return a {@code int} representing the score for this level
+     */
     private int processScore(){
 
         //Helper variable to count the score.
         int score = 0;
 
+        //Iterate over all questions
         for (Question question : questions) {
             //If question is passed.
             if(question.passed())
@@ -228,13 +252,21 @@ public class Level implements Parcelable {
         return 0;
     }
 
+    /**
+     * This method saves this state in a {@link android.os.Parcel} object.
+     *
+     * @param parcel
+     *          A {@link Parcel} object to store the state
+     *
+     * @param flags
+     */
     @Override
-    public void writeToParcel(Parcel dest, int flags) {
-        dest.writeString(name);
-        dest.writeString(earnings);
-        dest.writeString(requiredToUnlock);
-        dest.writeDouble(percentageRequiredToPass);
-        dest.writeList(questions);
-        dest.writeInt(failedQuestionIcon);
+    public void writeToParcel(Parcel parcel, int flags) {
+        parcel.writeString(name);
+        parcel.writeString(earnings);
+        parcel.writeString(requiredToUnlock);
+        parcel.writeDouble(percentageRequiredToPass);
+        parcel.writeList(questions);
+        parcel.writeInt(failedQuestionIcon);
     }
 }
