@@ -7,18 +7,22 @@ import android.media.MediaPlayer;
 import com.example.android.androidquizapp.question.Question;
 
 /**
- * Created by Android on 31-01-2018.
+ * {@link SoundUtils} class works as a helper to play sounds in the app.
+ *
+ * @author Fábio Gouveia
+ * @version 1.0
  */
 
 public final class SoundUtils {
 
     //Application context
-    Context context;
+    private Context context;
 
     //Use media player for sound effect
     private MediaPlayer mediaPlayer;
     //Handles audio focus when playing a sound
     private AudioManager audioManager;
+
     /**
      * This listener gets triggered whenever the audio focus changes
      * (i.e., we gain or lose audio focus because of another app or device).
@@ -47,7 +51,10 @@ public final class SoundUtils {
             }
         }
     };
-    //On completion listener
+
+    /**
+     * On completion listener
+     **/
     private MediaPlayer.OnCompletionListener onCompletionListener = new MediaPlayer.OnCompletionListener() {
         @Override
         public void onCompletion(MediaPlayer mediaPlayer) {
@@ -56,6 +63,12 @@ public final class SoundUtils {
         }
     };
 
+    /**
+     * {@link SoundUtils} constructor
+     *
+     * @param context
+     *          The application context
+     */
     public SoundUtils(Context context) {
         //Set up the context
         this.context = context;
@@ -64,12 +77,7 @@ public final class SoundUtils {
         audioManager = (AudioManager) context.getSystemService(Context.AUDIO_SERVICE);
     }
 
-    /** This method plays a sound
-     *
-     */
-
     /**
-     * <h1>playSound({@link Question.Sound} sound)</h1>
      * This method request audio focus to the android system
      * and plays a sound.
      *
