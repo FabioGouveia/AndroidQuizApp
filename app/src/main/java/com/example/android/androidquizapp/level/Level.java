@@ -190,7 +190,7 @@ public class Level implements Parcelable {
     }
 
     /**
-     * Return {@boolean} representing the locked state, {@code true} if is unlocked and [@code false}
+     * Return {@code boolean} representing the locked state, {@code true} if is unlocked and [@code false}
      * if not.
      *
      * @param levels
@@ -259,6 +259,7 @@ public class Level implements Parcelable {
      *          A {@link Parcel} object to store the state
      *
      * @param flags
+     *          Not used in this implementation see <a href="https://developer.android.com/reference/android/os/Parcelable.html#PARCELABLE_WRITE_RETURN_VALUE">Parcelable</a> docs
      */
     @Override
     public void writeToParcel(Parcel parcel, int flags) {
