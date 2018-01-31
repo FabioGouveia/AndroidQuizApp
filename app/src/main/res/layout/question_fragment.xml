@@ -1,105 +1,68 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:id="@+id/question_fragment_layout"
+    style="@style/LargeRootView">
 
+    <!-- Question text view -->
     <TextView
         android:id="@+id/question_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="32dp"
-        tools:text="Insert in the text field below the attribute that changes the orientation of the elements inside a LinearLayout ?" />
+        style="@style/QuestionTextView" />
 
+    <!-- Layout divider -->
     <View style="@style/QuestionHeaderDivider" />
 
+    <!-- Multiple choice question hint label -->
     <TextView
         android:id="@+id/multiple_choice_question_hint_textView"
         style="@style/MultipleChoiceHint"/>
 
+    <!-- Radio group layout for one choice multiple answers -->
     <RadioGroup
         android:id="@+id/answers_radio_group"
         style="@style/AnswersHolder">
 
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:radioButtonStyle"
-            android:visibility="gone" />
+        <RadioButton style="@style/AnswersHolderItem" />
 
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:radioButtonStyle"
-            android:visibility="gone" />
+        <RadioButton style="@style/AnswersHolderItem" />
 
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:radioButtonStyle"
-            android:visibility="gone" />
+        <RadioButton style="@style/AnswersHolderItem" />
 
-        <RadioButton
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:radioButtonStyle"
-            android:visibility="gone" />
+        <RadioButton style="@style/AnswersHolderItem" />
 
     </RadioGroup>
 
+    <!-- CheckBox layout for multiple choice answers -->
     <LinearLayout
         android:id="@+id/checkBoxes_holder"
         style="@style/AnswersHolder.checkBox">
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:checkboxStyle"
-            android:visibility="gone" />
+        <CheckBox style="@style/AnswersHolderItem.CheckBox" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:checkboxStyle"
-            android:visibility="gone" />
+        <CheckBox style="@style/AnswersHolderItem.CheckBox" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:checkboxStyle"
-            android:visibility="gone" />
+        <CheckBox style="@style/AnswersHolderItem.CheckBox" />
 
-        <CheckBox
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:checkboxStyle"
-            android:visibility="gone" />
+        <CheckBox style="@style/AnswersHolderItem.CheckBox" />
 
     </LinearLayout>
 
+    <!-- Text input layout for textual answers -->
     <android.support.design.widget.TextInputLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/question_text_view">
+        android:id="@+id/answer_text_input_layout"
+        style="@style/TextualAnswerLayout">
 
-        <EditText
+        <android.support.design.widget.TextInputEditText
             android:id="@+id/textual_answer_text_input_field"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:inputType="textCapSentences|textMultiLine"
-            android:maxLength="2000"
-            android:maxLines="4"
-            android:hint="@string/textual_answer_hint"
-            android:visibility="gone"/>
+            style="@style/TextualAnswerInputField" />
 
     </android.support.design.widget.TextInputLayout>
 
+    <!-- Answer button -->
     <Button
         android:id="@+id/answers_btn"
         style="@style/AnswerButton" />
 
+    <!-- Passed question green label -->
     <TextView
         android:id="@+id/passed_question_label_text_view"
         style="@style/PassedQuestionLabel"/>
