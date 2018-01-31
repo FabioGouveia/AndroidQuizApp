@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/dialog_progress_item_margin">
 
     <ProgressBar
         android:id="@+id/progress_dialog_progressBar"
@@ -12,36 +12,15 @@
 
     <TextView
         android:id="@+id/progress_dialog_progress_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingEnd="16dp"
-        android:paddingLeft="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:textAppearance="?android:textAppearanceSmall"
-        tools:text="Your progress: 0%"/>
+        style="@style/ProgressDialogTextViewStyle" />
 
     <TextView
         android:id="@+id/progress_dialog_passed_questions_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingEnd="16dp"
-        android:paddingLeft="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:textAppearance="?android:textAppearanceSmall"
-        tools:text="Passed questions: 6" />
+        style="@style/ProgressDialogTextViewStyle" />
 
 
     <TextView
         android:id="@+id/progress_dialog_wrong_answers_text_view"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:paddingEnd="16dp"
-        android:paddingLeft="16dp"
-        android:paddingStart="16dp"
-        android:paddingTop="16dp"
-        android:textAppearance="?android:textAppearanceSmall"
-        tools:text="Wrong answers: 3"/>
+        style="@style/ProgressDialogTextViewStyle" />
 
 </LinearLayout>
