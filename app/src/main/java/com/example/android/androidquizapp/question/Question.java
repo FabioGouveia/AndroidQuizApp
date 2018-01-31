@@ -4,18 +4,18 @@ import android.content.Context;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.example.android.androidquizapp.R;
 import com.example.android.androidquizapp.level.Level;
 
 import java.util.Arrays;
 
 /**
- * Created by Android on 20-12-2017.
+ * @author Fábio Gouveia
+ * @version 1.0
  */
 
-public class Question implements Parcelable {
+public final class Question implements Parcelable {
 
-    //Class members
-    public final static String QUESTION_KEY = "question";
     //Parcelable implementation
     public static final Creator<Question> CREATOR = new Creator<Question>() {
         @Override
@@ -28,27 +28,44 @@ public class Question implements Parcelable {
             return new Question[size];
         }
     };
+    //Class members
+    final static String QUESTION_KEY = "question";
     //Instance members
-    private String question, questionTip;
+    private String question, questionTip, questionTipWebAddress, textualUserAnswer;
     private String[] possibleAnswers;
     private int wrongAnswers;
     private boolean[] rightAnswersState;
     private boolean passed;
     private OnQuestionAttemptedListener onQuestionAttemptedListener;
 
-    //Question object constructor
-    public Question(String question, String questionTip, String[] possibleAnswers, boolean[] rightAnswersState, boolean passed, int wrongAnswers) {
+
+    /**
+     * @param question              - A string containing a textual question.
+     * @param questionTip           - A string containing a help to the question.
+     * @param questionTipWebAddress - A string containing a link to help answer the question.
+     * @param possibleAnswers       - A string array containing the possible
+     * @param rightAnswersState
+     * @param passed                - A boolean representing the question state, true if passed, false if not.
+     * @param wrongAnswers          - Number of wrong answers
+     * @param textualUserAnswer
+     */
+    public Question(String question, String questionTip, String questionTipWebAddress, String[] possibleAnswers, boolean[] rightAnswersState, boolean passed, int wrongAnswers, String textualUserAnswer) {
         this.question = question;
         this.questionTip = questionTip;
+        this.questionTipWebAddress = questionTipWebAddress;
+        this.textualUserAnswer = textualUserAnswer;
         this.possibleAnswers = possibleAnswers;
         this.wrongAnswers = wrongAnswers;
         this.rightAnswersState = rightAnswersState;
         this.passed = passed;
     }
 
+    //Question constructor with Parcel
     protected Question(Parcel in) {
         question = in.readString();
         questionTip = in.readString();
+        questionTipWebAddress = in.readString();
+        textualUserAnswer = in.readString();
         possibleAnswers = in.createStringArray();
         wrongAnswers = in.readInt();
         rightAnswersState = in.createBooleanArray();
@@ -64,24 +81,27 @@ public class Question implements Parcelable {
         return question;
     }
 
-
-    public String getQuestionTip(){
+    String getQuestionTip() {
         return questionTip;
+    }
+
+    String getQuestionTipEmail() {
+        return questionTipWebAddress;
     }
 
     /**
      *
      * @return String array representation of this question possible answers
      */
-    public String[] getPossibleAnswers(){
-        return  possibleAnswers;
+    String[] getPossibleAnswers() {
+        return possibleAnswers;
     }
 
-    public int getPossibleAnswersLength(){
+    int getPossibleAnswersLength() {
         return possibleAnswers.length;
     }
 
-    public boolean[] getRightAnswersState(){
+    boolean[] getRightAnswersState() {
         return rightAnswersState;
     }
 
@@ -101,6 +121,10 @@ public class Question implements Parcelable {
         }
     }
 
+    String getTextualUserAnswer() {
+        return textualUserAnswer;
+    }
+
     boolean checkAnswer(Context context, Level level, int questionIndex, boolean[] answerState){
 
         if(passed = Arrays.equals(answerState, rightAnswersState)){
@@ -112,7 +136,15 @@ public class Question implements Parcelable {
         return passed;
     }
 
-    //TODO: Comment this method...
+    /**
+     * This method checks if a textual answer is correct
+     *
+     * @param context       - Application context.
+     * @param level         - The level which this question belongs.
+     * @param questionIndex - The position of the question on level questions array.
+     * @param textualAnswer - A String with the textual answer given to answer this question.
+     * @return boolean - True if the question has been passed.
+     */
     boolean checkAnswer(Context context, Level level, int questionIndex, String textualAnswer){
         //Count possible answers.
         String[] possibleCorrectAnswers = possibleAnswers[0].split(",");
@@ -121,10 +153,11 @@ public class Question implements Parcelable {
         for (String possibleCorrectAnswer : possibleCorrectAnswers) {
             passed = textualAnswer.trim().equalsIgnoreCase(possibleCorrectAnswer.trim());
             //If answer is correct...
-            if(passed){
-                //Call passed...Yeahhh
-                //and stop the loop
-                onQuestionAttemptedListener.onQuestionPassed(context, level, questionIndex);
+            if (passed) {
+                //Set the user right answer
+                this.textualUserAnswer = textualAnswer;
+                //Call on question passed
+                onQuestionAttemptedListener.onQuestionPassed(context, level, questionIndex, textualAnswer);
                 break;
             }
         }
@@ -166,6 +199,8 @@ public class Question implements Parcelable {
     public void writeToParcel(Parcel parcel, int flags) {
         parcel.writeString(question);
         parcel.writeString(questionTip);
+        parcel.writeString(questionTipWebAddress);
+        parcel.writeString(textualUserAnswer);
         parcel.writeStringArray(possibleAnswers);
         parcel.writeInt(wrongAnswers);
         parcel.writeBooleanArray(rightAnswersState);
@@ -177,6 +212,24 @@ public class Question implements Parcelable {
     public void resetProgress(){
         passed = false;
         wrongAnswers = 0;
+    }
+
+    //Sound types
+    enum Sound {
+        LEVEL_PASSED(R.raw.sound_level_passed),
+        CORRECT_ANSWER(R.raw.sound_question_passed),
+        WRONG_ANSWER(R.raw.sound_question_failed);
+
+        private int resourceID;
+
+        //Enum constructor
+        Sound(int resourceID) {
+            this.resourceID = resourceID;
+        }
+
+        public int getResourceID() {
+            return resourceID;
+        }
     }
 
     enum Type {ONE_CHOICE, MULTIPLE_CHOICE, TEXTUAL}
