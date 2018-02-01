@@ -9,7 +9,9 @@
         style="@style/QuestionTextView" />
 
     <!-- Layout divider -->
-    <View style="@style/QuestionHeaderDivider" />
+    <View
+        android:id="@+id/question_divider"
+        style="@style/QuestionHeaderDivider" />
 
     <!-- Multiple choice question hint label -->
     <TextView
