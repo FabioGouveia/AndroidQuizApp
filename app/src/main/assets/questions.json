@@ -413,6 +413,56 @@
       ]
     },
     {
+      "question": "What is an anonymous class in android ?",
+      "options": [
+        [
+          "A final class",
+          false
+        ],
+        [
+          "An abstract class",
+          false
+        ],
+        [
+          "A class that doesn't have a name but has functionality on it",
+          true
+        ],
+        [
+          "A very special Interface",
+          false
+        ]
+      ],
+      "tip": [
+        "Anonymous classes enable you to make your code more concise. They are like local classes except that they do not have a name",
+        "https://docs.oracle.com/javase/tutorial/java/javaOO/anonymousclasses.html"
+      ]
+    },
+    {
+      "question": "What is a base adapter in android ?",
+      "options": [
+        [
+          "A kind of adapter",
+          false
+        ],
+        [
+          "An Intent storage adapter",
+          false
+        ],
+        [
+          "An adapter to work with C++ in android",
+          false
+        ],
+        [
+          "It is a common class of common implementation for an Adapter that can be used in both ListView and Spinner",
+          true
+        ]
+      ],
+      "tip": [
+        "BaseAdapter can be used in both ListView and Spinner...",
+        "https://developer.android.com/reference/android/widget/BaseAdapter.html"
+      ]
+    },
+    {
       "question" : "Like ListView a ViewPager makes use of an adapter to generate its view.",
       "options" : [
         ["True", true],
@@ -430,7 +480,28 @@
       ],
       "tip" : [
         "A Recycler view behaves like a ListView.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "http://www.bradcypert.com/android-listview-recyclerview-adapters/"
+      ]
+    },
+    {
+      "question": "How to store large amounts of structured data in android ?",
+      "options": [
+        [
+          "With a SharedPreferences file",
+          false
+        ],
+        [
+          "With a SQLite database",
+          true
+        ],
+        [
+          "It is not possible to store heavy amounts of structured data in android",
+          false
+        ]
+      ],
+      "tip": [
+        "We usually use databases to store large amounts of data.",
+        "https://developer.android.com/training/data-storage/sqlite.html"
       ]
     }
   ]
