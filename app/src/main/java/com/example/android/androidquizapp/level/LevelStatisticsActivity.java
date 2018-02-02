@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.example.android.androidquizapp.R;
 import com.example.android.androidquizapp.question.Question;
@@ -94,6 +95,7 @@ public class LevelStatisticsActivity extends AppCompatActivity {
                                 question.resetProgress();
                             }
                         }
+
                         //Erase persistent level progress.
                         QueryUtils.cleanProgress(getApplicationContext(), QueryUtils.createLevels(getApplicationContext()));
 
@@ -104,6 +106,9 @@ public class LevelStatisticsActivity extends AppCompatActivity {
                         statisticsAdapter.clear();
                         statisticsAdapter.addAll(QueryUtils.createLevels(getApplicationContext()));
                         statisticsAdapter.notifyDataSetChanged();
+
+                        //Progress cleaned
+                        Toast.makeText(getApplicationContext(), "Your progress was successfully cleaned!", Toast.LENGTH_SHORT).show();
                     }
                 });
 
@@ -123,6 +128,7 @@ public class LevelStatisticsActivity extends AppCompatActivity {
         leaveThisActivityProcess();
     }
 
+    //User wants to leave
     private void leaveThisActivityProcess(){
         //If we have a level we go back to the questions activity for this level.
         if(level != null){
