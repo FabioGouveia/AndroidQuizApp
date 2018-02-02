@@ -15,8 +15,6 @@ import com.example.android.androidquizapp.question.QuestionsActivity;
 import com.example.android.androidquizapp.utils.DialogUtils;
 import com.example.android.androidquizapp.utils.QueryUtils;
 
-import java.util.ArrayList;
-
 /**
  * The {@link LevelStatisticsActivity} is an activity with the propose to show
  * level statistics to the user.
@@ -26,7 +24,6 @@ import java.util.ArrayList;
  */
 
 public class LevelStatisticsActivity extends AppCompatActivity {
-
 
     private Level level;
 
@@ -58,8 +55,10 @@ public class LevelStatisticsActivity extends AppCompatActivity {
             level =  bundle.getParcelable(Level.LEVEL_KEY);
         }
 
-        statisticsAdapter = new LevelStatisticsAdapter(this, createLevels());
+        //Instantiate a custom adapter to work with the statistics ListView
+        statisticsAdapter = new LevelStatisticsAdapter(this, QueryUtils.createLevels(getApplicationContext()));
 
+        //Create a ListView to display the statistics
         ListView statisticsList  = findViewById(R.id.level_statistics_list);
         statisticsList.setAdapter(statisticsAdapter);
 
@@ -96,11 +95,14 @@ public class LevelStatisticsActivity extends AppCompatActivity {
                             }
                         }
                         //Erase persistent level progress.
-                        QueryUtils.cleanProgress(getApplicationContext(), createLevels());
+                        QueryUtils.cleanProgress(getApplicationContext(), QueryUtils.createLevels(getApplicationContext()));
+
+                        //No level data so we go back to level selection activity
+                        level = null;
 
                         //Update statistics list.
                         statisticsAdapter.clear();
-                        statisticsAdapter.addAll(createLevels());
+                        statisticsAdapter.addAll(QueryUtils.createLevels(getApplicationContext()));
                         statisticsAdapter.notifyDataSetChanged();
                     }
                 });
@@ -142,35 +144,5 @@ public class LevelStatisticsActivity extends AppCompatActivity {
     //This method help us overriding android pending transitions between activities when leave this activity to the level selection activity.
     private void animateBackActivityTransition(){
         overridePendingTransition(R.anim.enter_activity_questions_animation, R.anim.exit_activity_questions_animation);
-    }
-
-    /**
-     * The createLevels method hep us to get a list of levels
-     * with all the levels and question obtained trough two distinct resource files one is res/values/arrays.xml is where the level names, minimum scores, etc are stored the other is assets/questions.json and is where all the questions are stored.
-     * you can edit this two files to change level, add more level, remove levels etc...
-     *
-     * @return ArrayList - A list of levels with all the levels and question obtained trough resources files res/values/arrays.xml and assets/questions.json.
-     */
-    private ArrayList<Level> createLevels(){
-
-        //Create an array list to store the levels
-        ArrayList<Level> levelsArrayList = new ArrayList<>();
-
-        //Initialize our level string resources
-        String[] levelNameArray             = this.getResources().getStringArray(R.array.level_name);
-        String[] levelEarningsArray         = this.getResources().getStringArray(R.array.level_earnings);
-        String[] levelRequiredToUnlockArray = this.getResources().getStringArray(R.array.required_to_unlock_level);
-        int[]    levelScoreNeededToUnlock   = this.getResources().getIntArray(R.array.score_required_to_unlock);
-
-
-        //Store the number of levels into numLevels variable
-        int numLevels = levelNameArray.length;
-        //Create levels
-        for (int i = 0; i < numLevels; i++) {
-            levelsArrayList.add(new Level(levelNameArray[i], levelEarningsArray[i], levelRequiredToUnlockArray[i], levelScoreNeededToUnlock[i], QueryUtils.extractQuestions(this, levelNameArray[i].toLowerCase())));
-        }
-
-        //Return an ArrayList with levels
-        return levelsArrayList;
     }
 }
