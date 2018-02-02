@@ -1,21 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
-        android:title="Options"
         android:icon="@drawable/ic_settings"
+        android:title="@string/main_menu_options"
         app:showAsAction="always">
 
+        <!-- Submenu -->
         <menu>
+            <!-- see progress -->
             <item
                 android:id="@+id/main_menu_progress"
-                android:title="Progress"/>
+                android:title="@string/main_menu_progress" />
 
+            <!-- Sow initial slide check box -->
             <item
                 android:id="@+id/show_animation_checkbox"
-                android:title="Show Initial Slide"
-                android:checkable="true"/>
+                android:checkable="true"
+                android:title="@string/main_menu_slide" />
         </menu>
 
     </item>
