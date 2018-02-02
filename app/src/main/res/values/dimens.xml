@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO: remove reset size for better performance... -->
+
+    <!-- Global dimensions -->
+    <dimen name="dimen_xxs">1dp</dimen>
+    <dimen name="dimen_xs">2dp</dimen>
+    <dimen name="dimen_s">8dp</dimen>
+    <dimen name="dimen_m">16dp</dimen>
+    <dimen name="dimen_24">24dp</dimen>
+    <dimen name="dimen_l">32dp</dimen>
+    <dimen name="dimen_50">50dp</dimen>
+    <dimen name="dimen_xl">64dp</dimen>
+
+    <!-- Menu dropdown offset -->
+    <dimen name="menu_dropdown_offset">5.0dp</dimen>
+
+    <!-- Progressbar dimensions -->
     <dimen name="progressbar_height">5dp</dimen>
-    <dimen name="progressbar_thin_height">2dp</dimen>
+    <dimen name="progressbar_thin_height">@dimen/dimen_xs</dimen>
+
+    <!-- Level dimensions -->
+    <dimen name="level_selection_card_elevation">4dp</dimen>
+    <dimen name="level_selection_card_radius">@dimen/dimen_s</dimen>
+    <dimen name="level_selection_card_height">230dp</dimen>
+
+    <!-- Question dimensions -->
+    <dimen name="question_header_divider_weight">@dimen/dimen_xs</dimen>
+    <dimen name="multiple_choice_hint_margin_top">@dimen/dimen_s</dimen>
+    <dimen name="answers_holder_margin">@dimen/dimen_m</dimen>
+    <dimen name="answers_holder_checkbox_margin_top">@dimen/dimen_l</dimen>
+    <dimen name="answer_button_margin_bottom">@dimen/dimen_m</dimen>
+    <dimen name="passed_question_label_margin_bottom">@dimen/dimen_xl</dimen>
+
+    <!-- Progress dialog dimensions -->
+    <dimen name="dialog_progress_item_margin">@dimen/dimen_m</dimen>
 </resources>
