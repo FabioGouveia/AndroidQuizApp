@@ -17,8 +17,10 @@ import com.example.android.androidquizapp.level.LevelStatisticsActivity;
 import com.example.android.androidquizapp.utils.DialogUtils;
 
 /**
- * TODO: Complete this header
- * Created by Android on 19-12-2017.
+ * The {@link QuestionsActivity}
+ *
+ * @author Fábio Gouveia
+ * @version 1.0
  */
 
 public class QuestionsActivity extends AppCompatActivity {
@@ -33,7 +35,6 @@ public class QuestionsActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
-        //Get bundle from Intent call.
         Bundle bundle = getIntent().getExtras();
 
         //Get the supported action bar.
@@ -52,8 +53,8 @@ public class QuestionsActivity extends AppCompatActivity {
             //Get Level instance through a Parcelable.
             level =  bundle.getParcelable(Level.LEVEL_KEY);
 
-            //Set action bar with level name. TODO: Treat null pointer exception
-            actionBar.setTitle(level.getName());
+            //Set action bar with level name.
+            actionBar.setTitle(level != null ? level.getName() : "Questions");
         }
 
         //Initialize static number of wrong questions
@@ -72,6 +73,9 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
 
+    /**
+     * This method is called when android system is ready to create the options menu
+     **/
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -79,27 +83,30 @@ public class QuestionsActivity extends AppCompatActivity {
         return true;
     }
 
-    //TODO: comment the method in a proper way...
+    /** This method is called when someone clicks on a menu item **/
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch(item.getItemId()){
             case android.R.id.home:
+                //Called back home
                 startActivity(new Intent(this, LevelSelectionActivity.class));
                 animateBackActivityTransition();//Animate activities transition
                 break;
             case R.id.show_level_statistics:
 
+                //Called to show statistics, create a bundle with level statistics
                 Bundle statisticsBundle = new Bundle();
-                statisticsBundle.putString(DialogUtils.LEVEL_PROGRESS_TITLE_KEY, level.getName());
+                statisticsBundle.putString(DialogUtils.LEVEL_TITLE_KEY, level.getName());
                 statisticsBundle.putInt(DialogUtils.LEVEL_PROGRESS_SCORE_KEY, level.getScore());
                 statisticsBundle.putInt(DialogUtils.LEVEL_PROGRESS_QUESTIONS_PASSED_KEY, level.getNumberOfPassedQuestions());
                 statisticsBundle.putInt(DialogUtils.LEVEL_PROGRESS_WRONG_ANSWER_KEY, NUMBER_OF_WRONG_ANSWERS);
 
+                //Create a dialog utils, set up the type and use the bundle
                 DialogUtils levelProgressDialog = new DialogUtils();
                 levelProgressDialog.setType(DialogUtils.Type.LEVEL_PROGRESS_DIALOG);
                 levelProgressDialog.setArguments(statisticsBundle);
 
-                //Set a listener to listen positive clicks in the dialog.
+                //Set a listener to listen positive clicks on the dialog.
                 levelProgressDialog.setOnPositiveButtonClickedListener(new DialogUtils.OnPositiveButtonClickedListener() {
                     @Override
                     public void onPositiveButtonClicked() {
@@ -113,16 +120,18 @@ public class QuestionsActivity extends AppCompatActivity {
                     }
                 });
 
+                //Show the dialog
                 levelProgressDialog.show(getSupportFragmentManager(), null);
 
                 break;
             default:
+                //Strange click, just call the super method
                 super.onOptionsItemSelected(item);
         }
         return true;
     }
 
-    //This method is called when the user press the back button.
+    /** This method is called when someone presses the back button **/
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -131,16 +140,25 @@ public class QuestionsActivity extends AppCompatActivity {
     }
 
     /**
-     * This method changes the question to the next question if exists.
-     */
-    public void viewPagerNextQuestion(){
-        int currentQuestion = questionsViewPager.getCurrentItem();
-
-        if(currentQuestion < level.getNumberOfQuestions())
-            questionsViewPager.setCurrentItem(currentQuestion + 1,true);
+     * This method refreshes the view pager adapter
+     **/
+    public void viewPagerRefreshQuestionLayout() {
+        questionsViewPager.getAdapter().notifyDataSetChanged();
     }
 
-    //This method help us overriding android pending transitions between activities when leave this activity to the level selection activity.
+    /** This method changes the question to the next question if exists **/
+    public void viewPagerNextQuestion() {
+
+        //Get the current focused question on the view pager
+        int currentQuestion = questionsViewPager.getCurrentItem();
+
+        //The current question is lower then the total number of questions
+        if(currentQuestion < level.getNumberOfQuestions())
+            //Set the focus on the next question
+            questionsViewPager.setCurrentItem(currentQuestion + 1, true);
+    }
+
+    /** This method helps overriding the pending transitions between activities **/
     private void animateBackActivityTransition(){
         overridePendingTransition(R.anim.enter_activity_questions_animation, R.anim.exit_activity_questions_animation);
     }
@@ -149,4 +167,5 @@ public class QuestionsActivity extends AppCompatActivity {
     private void animateGoToStatisticsActivityTransition(){
         overridePendingTransition(R.anim.enter_activity_animation, R.anim.exit_activity_animation);
     }
+
 }
