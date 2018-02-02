@@ -64,10 +64,16 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
         //Get application resources.
         final Resources resources = context.getResources();
 
+        //State of orientation
+        boolean orientationLandscape = false;
+
         //Check device orientation to know how to display the cards
         if (resources.getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
-            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.MATCH_PARENT);
+            LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(340, LinearLayout.LayoutParams.WRAP_CONTENT);
             holder.rootView.setLayoutParams(layoutParams);
+
+            //set orientation landscape equal true
+            orientationLandscape = true;
         }
 
         //Basically in this step we copy the values we want to display from the level into the views on the holder.
@@ -77,22 +83,36 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
         //Verify if the card is enabled/disabled or if the position corresponding to the first level.
         if (level.isUnlocked(levels, position)){
             holder.levelEarnings.setText(level.getEarnings());
-            holder.numberOfQuestions.setCompoundDrawables(null,null,null,null);
-            int numQuestions = level.getNumberOfQuestions();
-            String numQuestionsLabel = String.format(resources.getString(R.string.number_of_questions_placeholder), numQuestions);
-            holder.numberOfQuestions.setText(numQuestionsLabel);
+            if (orientationLandscape) {
+                //Remove the header right corner questions label and show the footer one
+                holder.numberOfQuestionsTop.setVisibility(View.GONE);
+                holder.numberOfQuestions.setVisibility(View.VISIBLE);
+
+                //Set up the questions on the card
+                setupNumberOfQuestions(holder.numberOfQuestions, level, resources);
+            } else {
+                //Remove the header right corner questions label
+                holder.numberOfQuestionsTop.setVisibility(View.VISIBLE);
+
+                //Set up the questions on the card
+                setupNumberOfQuestions(holder.numberOfQuestionsTop, level, resources);
+            }
+
+            //Set up the score on the card
             String score = String.format(resources.getString(R.string.score_placeholder), level.getScore());
-            holder.cardFooter.setText(score);
+            holder.cardFooterRequiredTextView.setText(score);
         }else{
+
+            //Card is locked, disable the card
             holder.rootView.setCardBackgroundColor(resources.getColor(R.color.colorSecondaryDark));
             holder.cardHeader.setBackground(resources.getDrawable(R.drawable.level_card_header_bgd_disabled));
             holder.levelEarnings.setVisibility(View.GONE);
-            holder.numberOfQuestions.setText("");
-            holder.cardFooter.setText(level.getRequiredToUnlock());
+            holder.numberOfQuestionsTop.setText("");
+            holder.cardFooterRequiredTextView.setText(level.getRequiredToUnlock());
             holder.cardFooter.setBackground(resources.getDrawable(R.drawable.level_card_footer_bgd_disabled));
         }
 
-        //Listen the clicks in the cards
+        //Listen the clicks on the card
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -114,12 +134,23 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
                     ((Activity) context).overridePendingTransition(R.anim.enter_activity_animation, R.anim.exit_activity_animation);
 
                 }else{
-                    //TODO: Improve response design or create an exclusive activity to deal with this information...
+                    //User have no access to the level
                     Level levelToUnlock = levels.get(holder.getAdapterPosition() - 1);
                     Toast.makeText(context,"You need to score " + String.valueOf((int) levelToUnlock.getPercentageRequiredToPass()) + "% to reach " + level.getRequiredToUnlock() + " and unlock this level!", Toast.LENGTH_LONG).show();
                 }
             }
         });
+    }
+
+    /**
+     * This method setups the number of questions on cards
+     **/
+    private void setupNumberOfQuestions(TextView numQuestionsTextView, Level level, Resources resources) {
+        //Set up the number of questions
+        numQuestionsTextView.setCompoundDrawables(null, null, null, null);
+        int numQuestions = level.getNumberOfQuestions();
+        String numQuestionsLabel = String.format(resources.getString(R.string.number_of_questions_placeholder), numQuestions);
+        numQuestionsTextView.setText(numQuestionsLabel);
     }
 
     /**
@@ -147,7 +178,7 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
         icons.recycle();
         iconsDisabled.recycle();
 
-        //TODO: complete this comment...
+        //Choose what icon to return
         return (level.isUnlocked(levels, position)) ? iconResId : iconDisabledResId;
     }
 
@@ -157,7 +188,8 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
 
         private CardView rootView;
         private RelativeLayout cardHeader;
-        private TextView level, levelEarnings, numberOfQuestions, cardFooter;
+        private LinearLayout cardFooter;
+        private TextView level, levelEarnings, numberOfQuestionsTop, numberOfQuestions, cardFooterRequiredTextView;
         private ImageView levelIcon;
 
         private ViewHolder(View itemView) {
@@ -167,9 +199,11 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
             cardHeader = itemView.findViewById(R.id.card_header);
             level = itemView.findViewById(R.id.level_text_view);
             levelEarnings = itemView.findViewById(R.id.level_earnings_text_view);
+            numberOfQuestionsTop = itemView.findViewById(R.id.number_of_questions_text_view_top);
             numberOfQuestions = itemView.findViewById(R.id.number_of_questions_text_view);
             levelIcon = itemView.findViewById(R.id.level_icon);
-            cardFooter = itemView.findViewById(R.id.footer_text_view);
+            cardFooter = itemView.findViewById(R.id.card_footer);
+            cardFooterRequiredTextView = itemView.findViewById(R.id.footer_text_view);
         }
     }
 }
