@@ -143,7 +143,19 @@ public class LevelSelectionActivity extends AppCompatActivity {
                     userPreferences.edit().putBoolean(QueryUtils.ANIMATION_ON_START_KEY, true).apply();
                     invalidateOptionsMenu();//Refresh options menu
                 }
+                break;
+            case R.id.play_sound_effects_checkbox:
 
+                //When user click's the check box is checked
+                if (item.isChecked()) {
+                    //If the box is checked when the user click's, so the user want's to un-check the box and stop playing sound effects
+                    userPreferences.edit().putBoolean(QueryUtils.PLAY_SOUND_EFFECT_KEY, false).apply();
+                    invalidateOptionsMenu();//Refresh options menu
+                } else {
+                    //If the box is unchecked when the user click's, so the user want's to check the box and start's playing sound effects
+                    userPreferences.edit().putBoolean(QueryUtils.PLAY_SOUND_EFFECT_KEY, true).apply();
+                    invalidateOptionsMenu();//Refresh options menu
+                }
                 break;
             default:
             return super.onOptionsItemSelected(item);
