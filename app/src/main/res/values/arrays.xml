@@ -58,7 +58,7 @@
 
     <!-- Level card icons -->
     <array name="level_card_icon">
-        <item>@drawable/beginner_level_vector</item>
+        <item>@drawable/beginner_level_icon</item>
         <item>@drawable/amateur_level_icon</item>
         <item>@drawable/professional_level_icon</item>
         <item>@drawable/advanced_level_icon</item>
