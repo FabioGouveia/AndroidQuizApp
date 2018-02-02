@@ -2,37 +2,32 @@
 <android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    style="@style/LargeRootView">
 
+    <!-- Coordinator layout app bar layout -->
     <android.support.design.widget.AppBarLayout
         android:id="@+id/level_selection_bar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:fitsSystemWindows="true">
+        style="@style/LevelAppBarLayout">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/level_selection_toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            style="@style/LevelAppBarToolBar"
             app:layout_scrollFlags="scroll|enterAlways" />
 
     </android.support.design.widget.AppBarLayout>
 
+    <!-- A nested scroll view to work with app bar layout -->
     <android.support.v4.widget.NestedScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        style="@style/LargeRootView"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!-- Helps on smooth scroll -->
+        <ScrollView style="@style/LargeRootView">
 
+            <!-- A recycler view to recycle the level cards -->
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/difficulty_level_list"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scrollbars="none"/>
+                style="@style/LevelCardRecyclerView" />
 
         </ScrollView>
 
