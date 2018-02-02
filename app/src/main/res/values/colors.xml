@@ -13,7 +13,6 @@
     <color name="colorSecondaryText">#000000</color>
 
     <color name="colorButtonNormal">#757de8</color>
-    <color name="colorTransparent">#00ffffff</color>
     <color name="colorPassedQuestion">#488705</color>
     <color name="colorFailedQuestion">#ca0606</color>
 
