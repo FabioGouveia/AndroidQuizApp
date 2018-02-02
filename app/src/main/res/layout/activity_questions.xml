@@ -5,7 +5,9 @@
     <!-- Question tabs -->
     <android.support.design.widget.TabLayout
         android:id="@+id/questions_tab"
-        style="@style/QuestionTab"/>
+        style="@style/QuestionTab"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
     <!-- Questions view pager -->
     <android.support.v4.view.ViewPager
