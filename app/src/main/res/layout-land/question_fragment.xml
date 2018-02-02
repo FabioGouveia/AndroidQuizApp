@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/question_fragment_layout"
     style="@style/LargeRootView.Horizontal">
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+    <RelativeLayout style="@style/FloatingLayout.Horizontal">
 
         <!-- Question text view -->
         <TextView
             android:id="@+id/question_text_view"
-            style="@style/QuestionTextView"
-            tools:text="Some question" />
+            style="@style/QuestionTextView" />
 
         <!-- Answer button -->
         <Button
@@ -32,10 +27,7 @@
         android:id="@+id/question_divider"
         style="@style/QuestionHeaderDivider" />
 
-    <RelativeLayout
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1">
+    <RelativeLayout style="@style/FloatingLayout.Horizontal">
 
         <!-- Multiple choice question hint label -->
         <TextView
