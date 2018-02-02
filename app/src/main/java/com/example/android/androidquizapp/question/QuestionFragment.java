@@ -129,9 +129,11 @@ public class QuestionFragment extends Fragment {
         soundUtils.releaseMedia();
     }
 
-    /*
-        This method is used exclusively to hide the hard key board from the screen
-        if the user scroll the view pager without explicitly hide the key board.
+    /**
+     * This method is used exclusively to hide the hard key board from the screen
+     * if the user scroll the view pager without explicitly hide the key board.
+     *
+     * @return an <tt>Animation</tt> correspondent to the fragment animation
      */
     @Override
     public Animation onCreateAnimation(int transit, boolean enter, int nextAnim) {
@@ -175,7 +177,9 @@ public class QuestionFragment extends Fragment {
         }
     }
 
-    //This method constructs a multi choice select box panel for the answers and shows it on this fragment layout.
+    /**
+     * This method shows a multi choice select box panel on this layout
+     **/
     private void constructMultiChoiceAnswerPanelLayout(){
         final int numPossibleAnswers = question.getPossibleAnswersLength();
         answersState = new boolean[numPossibleAnswers];
@@ -210,7 +214,7 @@ public class QuestionFragment extends Fragment {
         }
     }
 
-    //This method constructs a textual answer panel and shows it on this fragment layout.
+    /** This method displays a textual answer panel on this layout **/
     private void constructTextualAnswerPanelLayout(){
         answerTextInputLayout.setVisibility(View.VISIBLE);
 
@@ -249,9 +253,7 @@ public class QuestionFragment extends Fragment {
     }
 
 
-    /**
-     * This method constructs a one choice radio button panel for the answers and shows it on this fragment layout
-     **/
+    /** This method displays a radio group on this layout **/
     private void constructOneChoiceAnswerPanelLayout(){
         final int numPossibleAnswers = question.getPossibleAnswersLength();
         answersState = new boolean[numPossibleAnswers];
@@ -280,9 +282,7 @@ public class QuestionFragment extends Fragment {
         }
     }
 
-    /**
-     * This method checks an answer
-     **/
+    /** This method checks an answer **/
     private void checkAnswer() {
         if (question.getType() == Question.Type.TEXTUAL && question.checkAnswer(getActivity().getApplicationContext(), level, questionIndex, textualAnswerInputField.getText().toString())) {
             showQuestionPassedLayoutMode();
@@ -314,9 +314,7 @@ public class QuestionFragment extends Fragment {
         }
     }
 
-    /**
-     * This method turns the layout to passed mode
-     **/
+    /** This method turns the layout to the question passed mode **/
     private void showQuestionPassedLayoutMode(){
         answerButton.setVisibility(View.GONE);
         passedQuestionLabel.setVisibility(View.VISIBLE);
@@ -341,9 +339,7 @@ public class QuestionFragment extends Fragment {
         }, 500);
     }
 
-    /**
-     * This method refresh the layout and plays a sound when this question is changed
-     **/
+    /** This method refresh the layout and plays a sound when this question is changed **/
     public void questionChanged() {
         startAnswerPanelConstruction();
     }
