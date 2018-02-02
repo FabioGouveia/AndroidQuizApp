@@ -18,6 +18,12 @@
                 android:id="@+id/show_animation_checkbox"
                 android:checkable="true"
                 android:title="@string/main_menu_slide" />
+
+            <!-- Play sound effects -->
+            <item
+                android:id="@+id/play_sound_effects_checkbox"
+                android:checkable="true"
+                android:title="@string/main_menu_sound" />
         </menu>
 
     </item>
