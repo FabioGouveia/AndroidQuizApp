@@ -5,6 +5,10 @@
     <string name="btn_answer">Answer</string>
 
     <!-- Menu strings -->
+    <string name="main_menu_options">Options</string>
+    <string name="main_menu_progress">Progress</string>
+    <string name="main_menu_slide">Show Initial Slide</string>
+    <string name="main_menu_sound">Play sound effects</string>
     <string name="show_question_progress">Show question progress</string>
     <string name="clean_level_progress">Clean level progress</string>
 
