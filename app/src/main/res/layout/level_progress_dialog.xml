@@ -2,24 +2,24 @@
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:id="@+id/progress_dialog_root_view"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:paddingBottom="@dimen/dialog_progress_item_margin">
+    style="@style/ProgressDialogRootView">
 
+    <!-- Level progress bar -->
     <ProgressBar
         android:id="@+id/progress_dialog_progressBar"
         style="@style/LevelProgressbar.ThinBar"/>
 
+    <!-- Progress label -->
     <TextView
         android:id="@+id/progress_dialog_progress_text_view"
         style="@style/ProgressDialogTextViewStyle" />
 
+    <!-- Question progress label -->
     <TextView
         android:id="@+id/progress_dialog_passed_questions_text_view"
         style="@style/ProgressDialogTextViewStyle" />
 
-
+    <!-- Number of wrong answers label -->
     <TextView
         android:id="@+id/progress_dialog_wrong_answers_text_view"
         style="@style/ProgressDialogTextViewStyle" />
