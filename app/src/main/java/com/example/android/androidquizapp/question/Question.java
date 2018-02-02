@@ -10,6 +10,8 @@ import com.example.android.androidquizapp.level.Level;
 import java.util.Arrays;
 
 /**
+ * The {@}
+ *
  * @author Fábio Gouveia
  * @version 1.0
  */
@@ -40,12 +42,14 @@ public final class Question implements Parcelable {
 
 
     /**
-     * @param question              - A string containing a textual question.
-     * @param questionTip           - A string containing a help to the question.
-     * @param questionTipWebAddress - A string containing a link to help answer the question.
-     * @param possibleAnswers       - A string array containing the possible
-     * @param rightAnswersState
-     * @param passed                - A boolean representing the question state, true if passed, false if not.
+     *
+     *
+     * @param question A string containing a textual question.
+     * @param questionTip A string containing a help to the question.
+     * @param questionTipWebAddress A string containing a link to help answer the question.
+     * @param possibleAnswers A string array containing the possible
+     * @param rightAnswersState A boolean
+     * @param passed A boolean representing the question state, true if passed, false if not.
      * @param wrongAnswers          - Number of wrong answers
      * @param textualUserAnswer
      */
@@ -171,10 +175,9 @@ public final class Question implements Parcelable {
     }
 
     /**
-     * The passed method returns a true if the answer was passed or
-     * false if don't.
+     * Return <tt>true</tt> if this  question has been passed.
      *
-     * @return Boolean - If the question was passed.
+     * @return <tt>true</tt> if this  question has been passed.
      */
     public boolean passed(){
         return passed;
@@ -184,7 +187,13 @@ public final class Question implements Parcelable {
         return wrongAnswers;
     }
 
-    //TODO: Comment this method
+    /**
+     * This method adds a new {@link OnQuestionAttemptedListener} for this question
+     * can deal with question attempts.
+     *
+     * @param onQuestionAttemptedListener Receives a new {@link OnQuestionAttemptedListener}
+     * @return this question instance
+     */
     public Question addOnQuestionPassedListener(OnQuestionAttemptedListener onQuestionAttemptedListener) {
         this.onQuestionAttemptedListener = onQuestionAttemptedListener;
         return this;
@@ -215,7 +224,7 @@ public final class Question implements Parcelable {
     }
 
     //Sound types
-    enum Sound {
+    public enum Sound {
         LEVEL_PASSED(R.raw.sound_level_passed),
         CORRECT_ANSWER(R.raw.sound_question_passed),
         WRONG_ANSWER(R.raw.sound_question_failed);
