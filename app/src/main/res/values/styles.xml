@@ -1,17 +1,11 @@
 <resources>
 
-    <!-- Base application theme. -->
+    <!-- Base application theme -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorButtonNormal">@color/colorPrimaryLight</item>
         <item name="actionOverflowMenuStyle">@style/OverflowMenu</item>
-    </style>
-
-    <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
-        <item name="android:windowDisablePreview">true</item>
-        <item name="overlapAnchor">false</item>
-        <item name="android:dropDownVerticalOffset">5.0dp</item>
     </style>
 
     <style name="AppTheme.NoActionBar" parent="Theme.AppCompat.Light.NoActionBar">
@@ -21,26 +15,61 @@
         <item name="colorAccent">@color/colorPrimary</item>
     </style>
 
-    <!-- Intro text style -->
-    <style name="IntroText">
+    <!-- Global styles -->
+    <style name="LargeRootView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">match_parent</item>
-        <item name="android:gravity">center</item>
-        <item name="android:textAppearance">?android:textAppearanceLarge</item>
-        <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
 
-    <!-- Slide Skip button -->
-    <style name="SkipIntroButton">
+    <style name="LargeRootView.Horizontal">
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="LargeRootView.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <!-- Alerts and dialogs -->
+
+    <!-- Failed question -->
+    <style name="FailedQuestionToast" parent="LargeRootView.Vertical">
+        <item name="android:padding">@dimen/dimen_m</item>
+    </style>
+
+    <style name="FailedQuestionToast.InternalLayout">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/failed_question_toast_bgd</item>
+        <item name="android:padding">@dimen/dimen_s</item>
+    </style>
+
+    <style name="FailedQuestionToastImageView">
+        <item name="android:layout_width">@dimen/dimen_50</item>
+        <item name="android:layout_height">@dimen/dimen_50</item>
+    </style>
+
+    <style name="FailedQuestionToastFields">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginBottom">24dp</item>
-        <item name="android:layout_alignParentBottom">true</item>
-        <item name="android:layout_alignParentRight">true</item>
-        <item name="android:background">@color/colorTransparent</item>
-        <item name="android:textColor">@color/colorPrimaryText</item>
-        <item name="android:alpha">0.5</item>
-        <item name="android:text">@string/skip_intro_button</item>
+        <item name="android:layout_toRightOf">@id/toast_failed_image_view</item>
+        <item name="android:layout_below">@id/toast_failed_title_view</item>
+        <item name="android:padding">@dimen/dimen_s</item>
+    </style>
+
+    <style name="FailedQuestionToastFields.Title">
+        <item name="android:text">@string/failed_question_toast_title</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textColor">@color/colorFailedQuestion</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="FailedQuestionToastFields.Link">
+        <item name="android:layout_below">@id/toast_failed_text_view</item>
+        <item name="android:autoLink">web</item>
+    </style>
+
+    <!-- Progress, confirmation and level passed alert -->
+    <style name="ProgressDialogRootView" parent="LargeRootView.Vertical">
+        <item name="android:paddingBottom">@dimen/dialog_progress_item_margin</item>
     </style>
 
     <!-- Progressbar label TextView customized styles -->
@@ -56,29 +85,159 @@
         <item name="android:max">@integer/progressbar_max</item>
         <item name="android:progressDrawable">@drawable/level_progressbar</item>
     </style>
+
     <style name="LevelProgressbar.ThinBar">
         <item name="android:layout_height">@dimen/progressbar_thin_height</item>
     </style>
 
-    <!-- Question styles -->
+    <!-- Menu styles -->
+    <style name="OverflowMenu" parent="Widget.AppCompat.PopupMenu.Overflow">
+        <item name="android:windowDisablePreview">true</item>
+        <item name="overlapAnchor">false</item>
+        <item name="android:dropDownVerticalOffset">@dimen/menu_dropdown_offset</item>
+    </style>
 
-    <!-- Style for a question tabs -->
+    <!-- ## Intro styles ## -->
+
+    <!-- Intro slide styles -->
+    <style name="IntroSlideRootView" parent="LargeRootView">
+        <item name="android:background">@color/colorPrimaryDark</item>
+        <item name="android:animateLayoutChanges">true</item>
+        <item name="android:padding">@dimen/dimen_m</item>
+    </style>
+
+    <!-- Intro text style -->
+    <style name="IntroText" parent="LargeRootView">
+        <item name="android:gravity">center</item>
+        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <!-- Slide Skip button -->
+    <style name="SkipIntroButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_24</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:background">@color/colorTransparent</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:alpha">0.5</item>
+        <item name="android:text">@string/skip_intro_button</item>
+    </style>
+
+    <!-- ## Level styles ## -->
+
+    <style name="LevelAppBarLayout" parent="Widget.Design.AppBarLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fitsSystemWindows">true</item>
+    </style>
+
+    <style name="LevelAppBarToolBar" parent="Base.Widget.AppCompat.Toolbar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">?attr/actionBarSize</item>
+    </style>
+
+    <style name="LevelCardRecyclerView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:scrollbars">none</item>
+    </style>
+
+    <!-- Level card -->
+    <style name="LevelCard">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/level_selection_card_height</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="LevelCardHeader">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/level_card_header_bgd</item>
+    </style>
+
+    <style name="LevelCardTextView">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <style name="LevelCardTextView.LevelTitle">
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+    </style>
+
+    <style name="LevelCardTextView.Earnings">
+        <item name="android:layout_below">@id/level_text_view</item>
+    </style>
+
+    <style name="LevelCardTextView.NumberOfQuestions">
+        <item name="android:layout_alignParentRight">true</item>
+        <item name="android:drawableLeft">@drawable/ic_lock_white</item>
+    </style>
+
+    <style name="LevelCardIcon">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">0dp</item>
+        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:scaleType">centerInside</item>
+    </style>
+
+    <style name="LevelCardFooter">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:background">@drawable/level_card_footer_bgd</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="LevelCardTextView.Score">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+    </style>
+
+    <style name="LevelCardTextView.FooterNumberOfQuestion">
+        <item name="android:layout_width">0dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:gravity">right</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- ## Question styles ## -->
+
+    <!-- Question Tabs style -->
     <style name="QuestionTab" parent="Widget.Design.TabLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
         <item name="tabBackground">@color/colorPrimaryLight</item>
         <item name="tabIndicatorColor">@color/colorPrimaryDark</item>
         <item name="tabSelectedTextColor">@android:color/white</item>
         <item name="tabGravity">fill</item>
         <item name="tabMode">scrollable</item>
-        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabIndicatorHeight">@dimen/dimen_xs</item>
         <item name="tabTextAppearance">@style/QuestionTabTextAppearance</item>
     </style>
+
+    <style name="QuestionTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <style name="QuestionTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:padding">@dimen/dimen_l</item>
+    </style>
+
     <!-- Question header divider -->
     <style name="QuestionHeaderDivider">
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/question_header_divider_height</item>
+        <item name="android:layout_height">@dimen/question_header_divider_weight</item>
         <item name="android:layout_below">@id/question_text_view</item>
         <item name="android:background">@color/colorPrimary</item>
     </style>
+
     <!-- Multiple choice hint -->
     <style name="MultipleChoiceHint">
         <item name="android:layout_width">match_parent</item>
@@ -91,6 +250,7 @@
         <item name="android:text">@string/multiple_choice_hint</item>
         <item name="android:visibility">gone</item>
     </style>
+
     <!-- Answers holder -->
     <style name="AnswersHolder">
         <item name="android:layout_width">match_parent</item>
@@ -98,6 +258,7 @@
         <item name="android:layout_below">@id/question_text_view</item>
         <item name="android:layout_marginLeft">@dimen/answers_holder_margin</item>
         <item name="android:layout_marginTop">@dimen/answers_holder_margin</item>
+        <item name="android:layout_marginRight">@dimen/answers_holder_margin</item>
         <item name="android:visibility">gone</item>
     </style>
 
@@ -105,6 +266,33 @@
         <item name="android:layout_marginTop">@dimen/answers_holder_checkbox_margin_top</item>
         <item name="android:orientation">vertical</item>
     </style>
+
+    <style name="AnswersHolderItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:radioButtonStyle</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="AnswersHolderItem.CheckBox">
+        <item name="android:textAppearance">?android:checkboxStyle</item>
+    </style>
+
+    <style name="TextualAnswerLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentLeft">true</item>
+        <item name="android:layout_below">@id/question_text_view</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="TextualAnswerInputField">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">textNoSuggestions</item>
+        <item name="android:hint">@string/textual_answer_hint</item>
+    </style>
+
     <!-- Answer button -->
     <style name="AnswerButton">
         <item name="android:layout_width">wrap_content</item>
@@ -115,10 +303,12 @@
         <item name="android:text">@string/btn_answer</item>
         <item name="android:textColor">@color/colorPrimaryText</item>
     </style>
+
     <!-- Passed question label style -->
     <style name="PassedQuestionLabel">
-        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
         <item name="android:layout_alignParentBottom">true</item>
         <item name="android:fontFamily">monospace</item>
         <item name="android:layout_marginBottom">@dimen/passed_question_label_margin_bottom</item>
@@ -126,16 +316,20 @@
         <item name="android:textAllCaps">true</item>
         <item name="android:textStyle">bold</item>
         <item name="android:textColor">@color/colorPassedQuestion</item>
-        <item name="android:textAppearance">?android:textAppearanceLarge</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
         <item name="android:text">@string/passed_question_label</item>
+        <item name="android:drawableEnd">@drawable/ic_question_done</item>
+        <item name="android:drawableRight">@drawable/ic_question_done</item>
         <item name="android:visibility">gone</item>
     </style>
 
-    <!-- Question Tabs style -->
-
-    <!-- Text appearance style for a category tab -->
-    <style name="QuestionTabTextAppearance" parent="TextAppearance.Design.Tab">
-        <item name="android:textColor">@android:color/darker_gray</item>
+    <!-- Dialog styles -->
+    <style name="ProgressDialogTextViewStyle">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">@dimen/dialog_progress_item_margin</item>
+        <item name="android:paddingTop">@dimen/dialog_progress_item_margin</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
     </style>
 
 </resources>
