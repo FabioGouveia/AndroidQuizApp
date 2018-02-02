@@ -136,7 +136,7 @@ class LevelSelectionCardAdapter extends RecyclerView.Adapter<LevelSelectionCardA
                 }else{
                     //User have no access to the level
                     Level levelToUnlock = levels.get(holder.getAdapterPosition() - 1);
-                    Toast.makeText(context,"You need to score " + String.valueOf((int) levelToUnlock.getPercentageRequiredToPass()) + "% to reach " + level.getRequiredToUnlock() + " and unlock this level!", Toast.LENGTH_LONG).show();
+                    Toast.makeText(context, "You need to score " + String.valueOf((int) levelToUnlock.getPercentageRequiredToPass()) + "% and " + level.getRequiredToUnlock().toLowerCase() + " this level!", Toast.LENGTH_LONG).show();
                 }
             }
         });
