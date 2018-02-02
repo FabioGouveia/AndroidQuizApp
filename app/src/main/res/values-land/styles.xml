@@ -1,0 +1,116 @@
+<resources>
+
+    <!-- Question Tabs style -->
+    <style name="QuestionTab" parent="Widget.Design.TabLayout">
+        <item name="tabBackground">@color/colorPrimaryLight</item>
+        <item name="tabIndicatorColor">@color/colorPrimaryDark</item>
+        <item name="tabSelectedTextColor">@android:color/white</item>
+        <item name="tabGravity">fill</item>
+        <item name="tabMode">scrollable</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabTextAppearance">@style/QuestionTabTextAppearance</item>
+    </style>
+
+    <style name="QuestionTabTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@android:color/darker_gray</item>
+    </style>
+
+    <!-- ## Question styles ## -->
+
+    <!-- Question text field -->
+    <style name="QuestionTextView">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginTop">@dimen/dimen_m</item>
+        <item name="android:padding">@dimen/dimen_s</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <!-- Answer button -->
+    <style name="AnswerButton">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_alignParentBottom">true</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_s</item>
+        <item name="android:text">@string/btn_answer</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+    </style>
+
+    <!-- Passed question label style -->
+    <style name="PassedQuestionLabel" parent="AnswerButton">
+        <item name="android:layout_marginBottom">@dimen/dimen_m</item>
+        <item name="android:fontFamily">monospace</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textColor">@color/colorPassedQuestion</item>
+        <item name="android:textAppearance">?android:textAppearanceMedium</item>
+        <item name="android:text">@string/passed_question_label</item>
+        <item name="android:drawableEnd">@drawable/ic_question_done</item>
+        <item name="android:drawableRight">@drawable/ic_question_done</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- Question header divider -->
+    <style name="QuestionHeaderDivider">
+        <item name="android:layout_width">@dimen/dimen_xxs</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginTop">@dimen/dimen_s</item>
+        <item name="android:layout_marginBottom">@dimen/dimen_s</item>
+        <item name="android:layout_alignRight">@id/question_text_view</item>
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <!-- Answers holder -->
+    <style name="AnswersHolder">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_below">@id/multiple_choice_question_hint_textView</item>
+        <item name="android:layout_marginLeft">@dimen/dimen_s</item>
+        <item name="android:layout_marginTop">@dimen/answers_holder_margin</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <!-- Multiple choice hint -->
+    <style name="MultipleChoiceHint">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginTop">@dimen/multiple_choice_hint_margin_top</item>
+        <item name="android:layout_centerHorizontal">true</item>
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
+        <item name="android:text">@string/multiple_choice_hint</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="AnswersHolder.checkBox">
+        <item name="android:layout_marginTop">@dimen/answers_holder_checkbox_margin_top</item>
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="AnswersHolderItem">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:radioButtonStyle</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="AnswersHolderItem.CheckBox">
+        <item name="android:textAppearance">?android:checkboxStyle</item>
+    </style>
+
+    <style name="TextualAnswerLayout" parent="Widget.Design.TextInputLayout">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:visibility">gone</item>
+    </style>
+
+    <style name="TextualAnswerInputField">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:inputType">textNoSuggestions</item>
+        <item name="android:hint">@string/textual_answer_hint</item>
+    </style>
+
+</resources>
