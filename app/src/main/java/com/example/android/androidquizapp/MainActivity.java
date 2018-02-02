@@ -26,11 +26,8 @@ import com.example.android.androidquizapp.utils.QueryUtils;
 
 public class MainActivity extends AppCompatActivity {
 
-    public final static String PREFERENCES_FILE = "prefs";
-    public final static String ANIMATION_ON_START_KEY = "show_initial_slide";
 
     private final static String ANIMATION_CURRENT_POSITION_KEY = "animation_current_repetition_saved_state";
-    private final static String FIRST_TIME_USAGE_KEY = "app_used";
 
     private TextView introText;
     private String[] introTextArray;
@@ -44,13 +41,13 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         //Get application shared preferences.
-        final SharedPreferences prefs = getSharedPreferences(PREFERENCES_FILE, MODE_PRIVATE);
+        final SharedPreferences prefs = getSharedPreferences(QueryUtils.PREFERENCES_FILE, MODE_PRIVATE);
 
         //User want's to see the animation?
-        boolean showAnimation = prefs.getBoolean(ANIMATION_ON_START_KEY, false);
+        boolean showAnimation = prefs.getBoolean(QueryUtils.ANIMATION_ON_START_KEY, true);
 
         //If user preferences contains animation on start boolean variable and showAnimation is equal false...
-        if(prefs.contains(ANIMATION_ON_START_KEY) && !showAnimation){
+        if (!showAnimation) {
             //Then we start level selection activity.
             startDifficultyLevelActivity();
         }
@@ -84,21 +81,13 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                if(!prefs.contains(FIRST_TIME_USAGE_KEY)){
+                if (!prefs.contains(QueryUtils.FIRST_TIME_USAGE_KEY)) {
                     try{
-                        QueryUtils.createPersistentData(getApplicationContext(), R.array.level_name);
+                        QueryUtils.createPersistentData(getApplicationContext(), R.array.level_name, prefs);
                     }catch(Exception e){
                         e.printStackTrace();
                         //Problems creating persistent data
                     }
-                    //Instantiate an SharedPreferences.Editor to edit user preferences
-                    SharedPreferences.Editor editor = prefs.edit();
-                    //App is used once
-                    editor.putBoolean(FIRST_TIME_USAGE_KEY, true);
-                    //Show initial slide when start
-                    editor.putBoolean(ANIMATION_ON_START_KEY, true);
-                    //Apply changes
-                    editor.apply();
                 }
             }
         }).start();//Start the thread...
@@ -168,6 +157,12 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    //Start select difficulty level activity
+    private void startDifficultyLevelActivity() {
+        startActivity(new Intent(this, LevelSelectionActivity.class));
+        overridePendingTransition(R.anim.enter_activity_animation, R.anim.exit_activity_animation);
+    }
+
     /*
     * Private inner class implementing AnimationListener;
     * Costume listener to listen the animation changes;
@@ -194,11 +189,5 @@ public class MainActivity extends AppCompatActivity {
             animationCurrentPosition++;
             changeAnimationText();
         }
-    }
-
-    //Start select difficulty level activity
-    private void startDifficultyLevelActivity(){
-        startActivity(new Intent(this, LevelSelectionActivity.class));
-        overridePendingTransition(R.anim.enter_activity_animation, R.anim.exit_activity_animation);
     }
 }
