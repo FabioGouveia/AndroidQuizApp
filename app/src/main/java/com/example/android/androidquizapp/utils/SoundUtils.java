@@ -1,6 +1,7 @@
 package com.example.android.androidquizapp.utils;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 
@@ -88,26 +89,46 @@ public final class SoundUtils {
      * @see Question
      */
     public void playSound(Question.Sound sound) {
-        // Request audio focus so in order to play the audio file. The app needs to play a
-        // short audio file, so we will request audio focus with a short amount of time
-        // with AUDIOFOCUS_GAIN_TRANSIENT.
-        int result = audioManager.requestAudioFocus(mOnAudioFocusChangeListener,
-                AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
-        if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
-            // We have audio focus now.
+        //If user allow us to play sound effects
+        if (canPlaySoundEffect()) {
 
-            // Create and setup the {@link MediaPlayer} for the audio resource associated
-            // with the current word
-            mediaPlayer = MediaPlayer.create(context, sound.getResourceID());
+            // Request audio focus so in order to play the audio file. The app needs to play a
+            // short audio file, so we will request audio focus with a short amount of time
+            // with AUDIOFOCUS_GAIN_TRANSIENT.
+            int result = audioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                    AudioManager.STREAM_MUSIC, AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
 
-            // Start the audio file
-            mediaPlayer.start();
+            if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                // We have audio focus now.
 
-            // Setup a listener on the media player, so that we can stop and release the
-            // media player once the sound has finished playing.
-            mediaPlayer.setOnCompletionListener(onCompletionListener);
+                // Create and setup the {@link MediaPlayer} for the audio resource associated
+                // with the current word
+                mediaPlayer = MediaPlayer.create(context, sound.getResourceID());
+
+                // Start the audio file
+                mediaPlayer.start();
+
+                // Setup a listener on the media player, so that we can stop and release the
+                // media player once the sound has finished playing.
+                mediaPlayer.setOnCompletionListener(onCompletionListener);
+            }
         }
+    }
+
+    /**
+     * Return a {@code boolean} representing if the sound can play, true if can play sound
+     * effects, false if don't.
+     *
+     * @return a <tt>boolean</tt> representing if the sound can play
+     */
+    private boolean canPlaySoundEffect() {
+
+        //Get application shared preferences.
+        final SharedPreferences prefs = context.getSharedPreferences(QueryUtils.PREFERENCES_FILE, Context.MODE_PRIVATE);
+
+        //User want's to play sound effects?
+        return prefs.getBoolean(QueryUtils.PLAY_SOUND_EFFECT_KEY, true);
     }
 
     /**
