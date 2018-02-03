@@ -28,7 +28,9 @@ import java.util.ArrayList;
 public class Level implements Parcelable {
 
     //Class members
-    public final static String LEVEL_KEY = "level";
+    public final static String LEVEL_KEY = "level_key";
+    public static final String PROGRESS_ERASED_KEY = "progress_erased_key";
+
     /**
      * Essential creator to create levels from parcels
      **/
