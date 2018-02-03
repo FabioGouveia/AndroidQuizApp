@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <!-- Level strings array:TODO: Comment this part of edition better...
+    <!-- Level strings array:
 
          To create more levels you have to create an image file also with the name of
          level followed by "_level_icon" and the extension of your image file, then you have to store it
@@ -32,7 +32,7 @@
         <item>Advanced</item>
     </string-array>
 
-    <!-- Level earning strings array TODO: control the length of earnings phrases-->
+    <!-- Level earning strings array -->
     <string-array name="level_earnings">
         <item>Earn Android baby status</item><!-- Beginner earning -->
         <item>Earn Android caterpillar status</item><!-- Amateur earning -->
