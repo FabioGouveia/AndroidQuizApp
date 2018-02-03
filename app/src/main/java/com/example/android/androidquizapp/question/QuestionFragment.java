@@ -50,6 +50,7 @@ public class QuestionFragment extends Fragment {
 
     //Question fragment class members
     private static final String QUESTION_INDEX_KEY = "question_index_key";
+    private static final String ANSWER_STATE_KEY = "answer_state_key";
 
     //Utilities for sound
     private SoundUtils soundUtils;
@@ -58,7 +59,7 @@ public class QuestionFragment extends Fragment {
     private View rootView;
     private Level level;
     private Question question;
-    private int questionIndex;
+    private int questionIndex, possibleAnswersLength;
     private String[] possibleAnswers;
     private TextView multipleChoiceQuestionHint, passedQuestionLabel;
     private RadioGroup oneChoiceAnswerRadioGroup;
@@ -66,8 +67,9 @@ public class QuestionFragment extends Fragment {
     private TextInputLayout answerTextInputLayout;
     private TextInputEditText textualAnswerInputField;
     private Button answerButton;
-    private boolean[] answersState;//For non textual answers
+    private boolean[] answerState;//For non textual answers
     private PopupWindow clickableToast;
+    private DialogUtils levelPassedDialog;
 
     public QuestionFragment(){}
 
@@ -84,6 +86,15 @@ public class QuestionFragment extends Fragment {
             questionIndex = savedInstanceState.getInt(QUESTION_INDEX_KEY);
             savedInstanceState.setClassLoader(Question.class.getClassLoader());
             question = savedInstanceState.getParcelable(Question.QUESTION_KEY);
+            answerState = savedInstanceState.getBooleanArray(ANSWER_STATE_KEY);
+            //Get the number of possible answers just once
+            possibleAnswersLength = question.getPossibleAnswersLength();
+        } else {
+            //Get the number of possible answers just once
+            possibleAnswersLength = question.getPossibleAnswersLength();
+
+            //Create a fresh new answer state
+            answerState = new boolean[possibleAnswersLength];
         }
 
         //Initialize our views
@@ -120,14 +131,6 @@ public class QuestionFragment extends Fragment {
         return rootView;
     }
 
-
-    @Override
-    public void onStop() {
-        super.onStop();
-
-        //Release the audio
-        soundUtils.releaseMedia();
-    }
 
     /**
      * This method is used exclusively to hide the hard key board from the screen
@@ -181,8 +184,6 @@ public class QuestionFragment extends Fragment {
      * This method shows a multi choice select box panel on this layout
      **/
     private void constructMultiChoiceAnswerPanelLayout(){
-        final int numPossibleAnswers = question.getPossibleAnswersLength();
-        answersState = new boolean[numPossibleAnswers];
 
         //Show hint to inform multiple choice answer.
         multipleChoiceQuestionHint.setVisibility(View.VISIBLE);
@@ -192,19 +193,27 @@ public class QuestionFragment extends Fragment {
 
         //Fill checkboxes with possible answers.
         CheckBox possibleAnswer;
-        for (int i = 0; i < numPossibleAnswers; i++) {
+        for (int i = 0; i < possibleAnswersLength; i++) {
             possibleAnswer = (CheckBox) checkBoxesHolder.getChildAt(i);
             possibleAnswer.setText(possibleAnswers[i]);
+
             if(question.passed()){
                 possibleAnswer.setEnabled(question.getRightAnswersState()[i]);
                 possibleAnswer.setChecked(question.getRightAnswersState()[i]);
-            }else{
+            } else {
+
+                possibleAnswer.setChecked(false);
+                possibleAnswer.setChecked(answerState[i]);
+
+                //Question not passed yet, aggregate a click listener
                 possibleAnswer.setOnClickListener(new View.OnClickListener() {
 
                     @Override
                     public void onClick(View v) {
-                        for (int j = 0; j < numPossibleAnswers; j++) {
-                            answersState[j] = ((CheckBox) checkBoxesHolder.getChildAt(j)).isChecked();
+
+                        //Get answer components state and fill the answer state
+                        for (int j = 0; j < possibleAnswersLength; j++) {
+                            answerState[j] = ((CheckBox) checkBoxesHolder.getChildAt(j)).isChecked();
                         }
                     }
                 });
@@ -228,7 +237,7 @@ public class QuestionFragment extends Fragment {
             textualAnswerInputField.setGravity(Gravity.CENTER_HORIZONTAL);
             textualAnswerInputField.setEnabled(false);
         } else {
-
+            //Listen clicks on keyboard keys
             textualAnswerInputField.setOnKeyListener(new View.OnKeyListener() {
                 @Override
                 public boolean onKey(View v, int keyCode, KeyEvent event) {
@@ -243,9 +252,12 @@ public class QuestionFragment extends Fragment {
                             checkAnswer();
                             return true;
                         } else {
+                            //Enter key was not pressed
                             return false;
                         }
                     }
+
+                    //Enter key was not pressed
                     return false;
                 }
             });
@@ -255,36 +267,51 @@ public class QuestionFragment extends Fragment {
 
     /** This method displays a radio group on this layout **/
     private void constructOneChoiceAnswerPanelLayout(){
-        final int numPossibleAnswers = question.getPossibleAnswersLength();
-        answersState = new boolean[numPossibleAnswers];
 
         oneChoiceAnswerRadioGroup.setVisibility(View.VISIBLE);
 
         RadioButton possibleAnswer;
-        for (int i = 0; i < numPossibleAnswers; i++) {
+
+        //Do this for all possible answers
+        for (int i = 0; i < possibleAnswersLength; i++) {
             possibleAnswer = (RadioButton) oneChoiceAnswerRadioGroup.getChildAt(i);
             possibleAnswer.setText(possibleAnswers[i]);
+
+            //If there was interaction on answer components or the question was passed
             if (question.passed()) {
                 possibleAnswer.setEnabled(question.getRightAnswersState()[i]);
                 possibleAnswer.setChecked(question.getRightAnswersState()[i]);
-            }else {
+            } else {
+
+                possibleAnswer.setChecked(false);
+                possibleAnswer.setChecked(answerState[i]);
+
+                //Question not passed yet, aggregate a click listener
                 possibleAnswer.setOnClickListener(new View.OnClickListener(){
+
                     @Override
                     public void onClick(View v) {
-                        for (int j = 0; j < numPossibleAnswers; j++) {
-                            answersState[j] = ((RadioButton) oneChoiceAnswerRadioGroup.getChildAt(j)).isChecked();
+
+                        //Get answer components state and fill the answer state
+                        for (int j = 0; j < possibleAnswersLength; j++) {
+                            answerState[j] = ((RadioButton) oneChoiceAnswerRadioGroup.getChildAt(j)).isChecked();
                         }
                     }
                 });
             }
 
+
             possibleAnswer.setVisibility(View.VISIBLE);
         }
     }
 
-    /** This method checks an answer **/
+    /**
+
+     /** This method checks an answer **/
     private void checkAnswer() {
         if (question.getType() == Question.Type.TEXTUAL && question.checkAnswer(getActivity().getApplicationContext(), level, questionIndex, textualAnswerInputField.getText().toString())) {
+
+            //Change the layout
             showQuestionPassedLayoutMode();
 
             //Go to the next question
@@ -294,7 +321,7 @@ public class QuestionFragment extends Fragment {
                 //Show level passed notification
                 showLevelPassedNotification();
             }
-        } else if (question.getType() != Question.Type.TEXTUAL && question.checkAnswer(getActivity().getApplicationContext(), level, questionIndex, answersState)) {
+        } else if (question.getType() != Question.Type.TEXTUAL && question.checkAnswer(getActivity().getApplicationContext(), level, questionIndex, answerState)) {
             showQuestionPassedLayoutMode();
 
             //Go to the next question
@@ -420,7 +447,7 @@ public class QuestionFragment extends Fragment {
         levelPassedArguments.putString(DialogUtils.LEVEL_EARNINGS_KEY, level.getEarnings());
 
         //Create the dialog to show
-        DialogUtils levelPassedDialog = new DialogUtils();
+        levelPassedDialog = new DialogUtils();
         levelPassedDialog.setType(DialogUtils.Type.LEVEL_PASSED_ALERT_DIALOG);
         levelPassedDialog.setArguments(levelPassedArguments);
 
@@ -459,10 +486,33 @@ public class QuestionFragment extends Fragment {
             clickableToast.dismiss();
         }
 
+        outState.putBooleanArray(ANSWER_STATE_KEY, answerState);
         outState.putParcelable(Level.LEVEL_KEY, level);
         outState.putInt(QUESTION_INDEX_KEY, questionIndex);
         outState.putParcelable(Question.QUESTION_KEY, question);
 
         super.onSaveInstanceState(outState);
+    }
+
+    @Override
+    public void onPause() {
+
+        //Dismiss the dialogs, toast and alerts if they exist
+        if (clickableToast != null) {
+            clickableToast.dismiss();
+        }
+        if (levelPassedDialog != null) {
+            levelPassedDialog.dismiss();
+        }
+
+        super.onPause();
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+
+        //Release the audio
+        soundUtils.releaseMedia();
     }
 }
