@@ -163,13 +163,13 @@
       ]
     },
     {
-      "question" : "Events listeners it´s a powerful tool just to collect data about the system interaction with a app.",
+      "question": "Event listeners are powerful tools to just collect data about the system interaction with an app.",
       "options" : [
         ["true", false],
         ["false", true]
       ],
       "tip" : [
-        "Events listeners it´s a powerful tool to collect a lot more data then just data about the system interaction with the app.",
+        "Event listeners are powerful tools to collect a lot more then just system interactions.",
         "https://developer.android.com/guide/topics/ui/ui-events.html"
       ]
     },
@@ -182,16 +182,15 @@
         ["View.OnTouchListener", true]
       ],
       "tip" : [
-        "<b>View.OnKeyListener</b> is useful for hardware keyboards.",
+        "View.OnKeyListener is useful for hardware keyboards.",
         "https://developer.android.com/reference/android/view/View.OnKeyListener.html"
       ]
     },
     {
-      "question" : "Which class can be used with startActivity() method to launch an activity ?",
+      "question": "Which class can be passed as an argument of startActivity() method to launch an activity ?",
       "options" : [
         [
-          "intent,an intent,intent class,an intent class",
-          "class intent",
+          "intent,an intent,intent class,an intent class, class intent",
           true
         ]
       ],
@@ -220,7 +219,7 @@
         ["false", false]
       ],
       "tip" : [
-        "<b>Android provides MediaPlayer class to access built-in media player services like playing audio, video, etc....",
+        "Android provides MediaPlayer class to access built-in media player services like playing audio, video, etc....",
         "https://developer.android.com/reference/android/media/MediaPlayer.html"
       ]
     },
