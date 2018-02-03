@@ -25,33 +25,45 @@ import com.example.android.androidquizapp.utils.DialogUtils;
 
 public class QuestionsActivity extends AppCompatActivity {
 
+    //Help's keeping the statistics dialog up to date
     public static int NUMBER_OF_WRONG_ANSWERS;
 
+    //Instance members
     private Level level;
     private ViewPager questionsViewPager;
+    private DialogUtils levelProgressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_questions);
 
-        Bundle bundle = getIntent().getExtras();
+        if (savedInstanceState != null) {
+            //Set the class loader to load a Level object from a Parcelable object.
+            savedInstanceState.setClassLoader(Level.class.getClassLoader());
+            //Get Level instance through a Parcelable.
+            level = savedInstanceState.getParcelable(Level.LEVEL_KEY);
+        } else {
+            //Used for calls coming from questions activity
+            Bundle bundle = getIntent().getExtras();
 
+            if (bundle != null) {
+                //Set the class loader to load a Parcelable object.
+                bundle.setClassLoader(Level.class.getClassLoader());
+                //Get Level instance so we can go back to the same activity questions where we were.
+                level = bundle.getParcelable(Level.LEVEL_KEY);
+            }
+        }
         //Get the supported action bar.
         ActionBar actionBar = getSupportActionBar();
 
 
-        if(bundle != null && actionBar != null){
+        if (actionBar != null) {
 
             //Set arrow home button enabled.
             actionBar.setDisplayHomeAsUpEnabled(true);
             actionBar.setDisplayShowHomeEnabled(true);
             actionBar.setHomeButtonEnabled(true);
-
-            //Set the class loader to load a Parcelable object.
-            bundle.setClassLoader(Level.class.getClassLoader());
-            //Get Level instance through a Parcelable.
-            level =  bundle.getParcelable(Level.LEVEL_KEY);
 
             //Set action bar with level name.
             actionBar.setTitle(level != null ? level.getName() : "Questions");
@@ -102,7 +114,7 @@ public class QuestionsActivity extends AppCompatActivity {
                 statisticsBundle.putInt(DialogUtils.LEVEL_PROGRESS_WRONG_ANSWER_KEY, NUMBER_OF_WRONG_ANSWERS);
 
                 //Create a dialog utils, set up the type and use the bundle
-                DialogUtils levelProgressDialog = new DialogUtils();
+                levelProgressDialog = new DialogUtils();
                 levelProgressDialog.setType(DialogUtils.Type.LEVEL_PROGRESS_DIALOG);
                 levelProgressDialog.setArguments(statisticsBundle);
 
@@ -131,12 +143,32 @@ public class QuestionsActivity extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle outState) {
+
+        //Save the level on screen rotation
+        outState.putParcelable(Level.LEVEL_KEY, level);
+
+        super.onSaveInstanceState(outState);
+    }
+
     /** This method is called when someone presses the back button **/
     @Override
     public void onBackPressed() {
         super.onBackPressed();
         //Animate the activity transition
         animateBackActivityTransition();
+    }
+
+    @Override
+    protected void onPause() {
+
+        //If level progress dialog exists
+        if (levelProgressDialog != null) {
+            levelProgressDialog.dismiss();
+        }
+
+        super.onPause();
     }
 
     /**
@@ -163,7 +195,9 @@ public class QuestionsActivity extends AppCompatActivity {
         overridePendingTransition(R.anim.enter_activity_questions_animation, R.anim.exit_activity_questions_animation);
     }
 
-    //This method help us overriding android pending transitions between activities when changing to statistics activity.
+    /**
+     * This method help us overriding android pending transitions between activities when changing to statistics activity
+     **/
     private void animateGoToStatisticsActivityTransition(){
         overridePendingTransition(R.anim.enter_activity_animation, R.anim.exit_activity_animation);
     }
