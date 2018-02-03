@@ -46,17 +46,17 @@
         ["RelativeLayout", true]
       ],
       "tip" : [
-        "ImageView it's not a view group.",
-        "https://developer.android.com/reference/android/widget/ImageView.html"
+        "I can say View groups hold another views inside it.",
+        "https://developer.android.com/reference/android/view/ViewGroup.html"
       ]
     },
     {
-      "question" : "Insert in the text field below the xml attribute that changes the orientation of the elements inside a LinearLayout ?",
+      "question": "Insert in the text field below the xml attribute that changes the orientation on the elements inside a LinearLayout ?",
       "options" : [
         ["orientation,orientation attribute,android:orientation,android:orientation attribute", true]
       ],
       "tip" : [
-        "You can visit the link below.",
+        "Should the layout be a column or a row? Use \"horizontal\" for a row, \"vertical\" for a column.",
         "https://developer.android.com/reference/android/widget/LinearLayout.html#attr_android:orientation"
       ]
     },
@@ -119,7 +119,7 @@
         ["setLayoutView(R.layout.activity_main)", false]
       ],
       "tip" : [
-        "Set the activity content from a layout resource. The resource will be inflated, adding all top-level views to the activity.",
+        "Set the activity 'content view' from a layout resource.",
         "https://developer.android.com/reference/android/app/Activity.html#setContentView(int)"
       ]
     }
@@ -189,7 +189,11 @@
     {
       "question" : "Which class can be used with startActivity() method to launch an activity ?",
       "options" : [
-        ["Intent,An Intent,Intent class,An intent class", true]
+        [
+          "intent,an intent,intent class,an intent class",
+          "class intent",
+          true
+        ]
       ],
       "tip" : [
         "An Intent is an abstract description of an operation to be performed. It can be used with startActivity to launch an activity.",
@@ -199,7 +203,10 @@
     {
       "question" : "Which class represents a view containing a little message for the user, that when is shown appears as a float view over the app ?",
       "options" : [
-        ["Toast,A Toast,Toast class,A Toast class,Toast view,A Toast view", true]
+        [
+          "toast,a toast,toast class,a toast class,toast view,a toast view",
+          true
+        ]
       ],
       "tip" : [
         "A toast is a view containing a quick little message for the user. The toast class helps you create and show those.",
@@ -245,12 +252,15 @@
       "options" : [
         ["User service", false],
         ["System interface", false],
-        ["System service", true],
+        [
+          "Class to notify the user of events that happen.",
+          true
+        ],
         ["Interactive service", false]
       ],
       "tip" : [
-        "GridView is a view group that displays items in a two-dimensional, scrollable grid.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "NotificationManager is a class to notify the user of events that happen.",
+        "https://developer.android.com/reference/android/app/NotificationManager.html"
       ]
     },
     {
@@ -263,7 +273,7 @@
       ],
       "tip" : [
         "Remember OOP concept.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "https://developer.android.com/reference/java/lang/Object.html"
       ]
     },
     {
@@ -276,20 +286,32 @@
       ],
       "tip" : [
         "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "https://developer.android.com/reference/android/app/PendingIntent.html"
       ]
     },
     {
-      "question" : "For MIME Text/Html document, which encoding will be used ?",
+      "question": "AlertDialog is a subclass of...",
       "options" : [
-        ["UTF-8", true],
-        ["ASCIEE", false],
-        ["BCD", false],
-        ["EBCDIC", false]
+        [
+          "Alert",
+          false
+        ],
+        [
+          "NotificationManager",
+          false
+        ],
+        [
+          "Dialog",
+          true
+        ],
+        [
+          "ContentProvider",
+          false
+        ]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "AlertDialog is a dialog isn't it..?",
+        "https://developer.android.com/reference/android/app/AlertDialog.html"
       ]
     },
     {
@@ -301,8 +323,8 @@
         ["Manifest file", true]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "The manifest file displays essential information about the application to the Android system.",
+        "https://developer.android.com/guide/topics/manifest/manifest-intro.html"
       ]
     },
     {
@@ -314,8 +336,8 @@
         ["Resources.NotFoundException", false]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "See the explanation on android developers site.",
+        "https://developer.android.com/reference/android/content/pm/PackageManager.NameNotFoundException.html"
       ]
     },
     {
@@ -327,8 +349,8 @@
         ["A Fragment is a piece of an activity which enables more modular activity design", true]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "You can combine multiple fragments into a single activity to compile a multi-panel UI and reuse a fragment into multiple activities.",
+        "https://developer.android.com/guide/components/fragments.html"
       ]
     },
     {
@@ -338,8 +360,8 @@
         ["No", true]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "A fragment is like a modular section of an activity, which has its own life cycle.",
+        "https://developer.android.com/guide/components/fragments.html"
       ]
     },
     {
@@ -351,8 +373,8 @@
         ["You can replace an activity with a fragment", false]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "A fragment must always be embedded in an activity and its life cycle is directly impacted by the host activity life cycle.",
+        "https://developer.android.com/guide/components/fragments.html"
       ]
     },
     {
@@ -379,8 +401,8 @@
         ["A class that can create only one object", true]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "Singleton comes from single.",
+        "http://www.vogella.com/tutorials/DesignPatternSingleton/article.html"
       ]
     },
     {
@@ -392,8 +414,8 @@
         ["Interface is a xml files", false]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "Interfaces can promote code reuse and modularity.",
+        "https://docs.oracle.com/javase/tutorial/java/concepts/interface.html"
       ]
     },
     {
@@ -408,8 +430,33 @@
         ]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "BLOB is a collection of binary data stored as a single entity in a database management system",
+        "https://en.wikipedia.org/wiki/Binary_large_object"
+      ]
+    },
+    {
+      "question": "What does acronym CLOB mean ?",
+      "options": [
+        [
+          "Character low object",
+          false
+        ],
+        [
+          "CDS linear oriented binary",
+          false
+        ],
+        [
+          "Character large object",
+          true
+        ],
+        [
+          "CLOB doesn't exists",
+          false
+        ]
+      ],
+      "tip": [
+        "CLOB is a collection of character data in a database management system.",
+        "https://en.wikipedia.org/wiki/Character_large_object"
       ]
     },
     {
@@ -469,8 +516,8 @@
         ["False", false]
       ],
       "tip" : [
-        "The word pending says everything.",
-        "https://developer.android.com/guide/topics/ui/layout/gridview.html"
+        "Both use set adapter method.",
+        "https://developer.android.com/reference/android/support/v4/view/ViewPager.html"
       ]
     },
     {
@@ -500,8 +547,21 @@
         ]
       ],
       "tip": [
-        "We usually use databases to store large amounts of data.",
+        "Usually used databases to store large amounts of data.",
         "https://developer.android.com/training/data-storage/sqlite.html"
+      ]
+    },
+    {
+      "question": "You can interact with a content provider through a...",
+      "options": [
+        [
+          "content resolver, contentResolver, content resolver class, contentResolver class",
+          true
+        ]
+      ],
+      "tip": [
+        "You need to get a resolver to interact with your provider.",
+        "https://developer.android.com/guide/topics/providers/content-providers.html"
       ]
     }
   ]
