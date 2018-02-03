@@ -485,22 +485,22 @@
       ]
     },
     {
-      "question": "What is a base adapter in android ?",
+      "question": "Base adapter is a...",
       "options": [
         [
-          "A kind of adapter",
+          "Kind of adapter",
           false
         ],
         [
-          "An Intent storage adapter",
+          "Intent storage adapter",
           false
         ],
         [
-          "An adapter to work with C++ in android",
+          "Adapter to work with C++ in android",
           false
         ],
         [
-          "It is a common class of common implementation for an Adapter that can be used in both ListView and Spinner",
+          "Common class of common implementation for an Adapter that can be used in both ListView and Spinner",
           true
         ]
       ],
