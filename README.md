@@ -7,8 +7,7 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 
 <ul>
     <li><a href="#add_edit_or_remove_levels" title="How to add, edit or remove a level">Add, edit or remove a level</a></li>
-    <li><a href="#add_edit_or_remove_questions" title="How to add, edit or remove a question">Add or remove questions</a></li>
-    <li><a href="#edit_questions" title="How to edit a question">Add and edit questions</a></li>
+    <li><a href="#add_edit_or_remove_questions" title="How to add, edit or remove a question">Add, edit or remove questions</a></li>
     <li><a href="#setup_multiple_choice_question" title="How to add or edit a multiple choice question">How can I setup a multiple choice question</a></li>
     <li><a href="#setup_one_choice_question" title="How to add or edit one choice questions">How can I setup one choice questions</a></li>
     <li><a href="#setup_yes_or_no_question" title="How to add or edit yes/no questions">How can I add or edit yes/no questions</a></li>
