@@ -6,7 +6,8 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 
 
 <ul>
-    <li><a href="#add_or_remove_questions" title="How to add or remove a question">Add or remove questions</a></li>
+    <li><a href="#add_edit_or_remove_levels" title="How to add, edit or remove a level">Add, edit or remove a level</a></li>
+    <li><a href="#add_edit_or_remove_questions" title="How to add, edit or remove a question">Add or remove questions</a></li>
     <li><a href="#edit_questions" title="How to edit a question">Add and edit questions</a></li>
     <li><a href="#setup_multiple_choice_question" title="How to add or edit a multiple choice question">How can I setup a multiple choice question</a></li>
     <li><a href="#setup_one_choice_question" title="How to add or edit one choice questions">How can I setup one choice questions</a></li>
@@ -14,15 +15,17 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
     <li><a href="#setup_textual_question" title="How to add textual questions">How can I add textual questions</a></li>
 </ul>
 
+<h3 name="add_edit_or_remove_levels">Add, edit or remove levels</h3>
+<p>Add, edit and remove levels in a simple way through a xml file called arrays.xml that is stored in values folder.</p>
 
-<h3 name="add_or_remove_questions">Add or remove questions</h3>
-<p>Add and remove levels in a simple way through a json file called question.json that is stored in assets folder.</p>
-
+<h3 name="add_edit_or_remove_questions">Add, edit or remove questions</h3>
+<p>Add, edit and remove questions in a simple way through a json file called question.json that is stored in assets folder.</p>
 
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/JSONQuestionsFilePath.PNG" alt="How to add and remove questions image" title="How to add and remove questions" />
 
 
 <h4 name="edit_questions">Edit questions</h4>
+
 <p>JSON fast question edition...<p>
 <p>Add a question and simple turn your questions in multiple choice, one choice and textual questions by editing boolean second parameter on <i>options</i> JSON array.</p>
 
@@ -39,9 +42,8 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 
 
 <p name="setup_textual_question">You also can add textual questions by adding just one element to the <i>options</i> array, always setted to true.</p>
-<p>Add the possible answer as an array of strings separated by commas...</p>
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/TextualQuestionEdition.PNG" alt="How to setup a textual question image" title="How to add a textual question" />
-
+<p>Add the possible answer as an array of strings separated by commas...</p>
 
 This app uses nice sound effects from "https://www.zapsplat.com“, thank's to zapsplat for this amazing
 sound effects.
