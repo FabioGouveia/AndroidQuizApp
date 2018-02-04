@@ -44,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
         final SharedPreferences prefs = getSharedPreferences(QueryUtils.PREFERENCES_FILE, MODE_PRIVATE);
 
         //User want's to see the animation?
-        boolean showAnimation = prefs.getBoolean(QueryUtils.ANIMATION_ON_START_KEY, true);
+        boolean showAnimation = prefs.getBoolean(QueryUtils.PLAY_INITIAL_SLIDE_KEY, true);
 
         //If user preferences contains animation on start boolean variable and showAnimation is equal false...
         if (!showAnimation) {
