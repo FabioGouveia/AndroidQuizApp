@@ -8,6 +8,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -58,13 +59,22 @@ final class JsonUtils {
             case EXTERNAL: inputStream = context.openFileInput(JSON_DATA_FILE);    break;
         }
 
-        int size = inputStream.available();//The number of bytes that can be read from this input stream
-        byte[] buffer = new byte[size];
-        inputStream.read(buffer);
+        //Byte array to work with input stream
+        ByteArrayOutputStream jsonByteArray = new ByteArrayOutputStream();
+
+        //Create a buffer
+        byte[] buffer = new byte[inputStream.available()];
+
+        int character;
+        //Will input stream have characters
+        while ((character = inputStream.read(buffer)) != -1) {
+            jsonByteArray.write(buffer, 0, character);
+        }
+
+        //Close the input stream after work with it
         inputStream.close();
 
-        String jsonString = new String(buffer, "UTF-8");
-        return new JSONObject(jsonString);
+        return new JSONObject(jsonByteArray.toString("UTF-8"));
     }
 
     /**
