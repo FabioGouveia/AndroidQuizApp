@@ -1,8 +1,7 @@
 # AndroidQuizApp
 This is a fully customizable quiz app made with a lot of effort and focused on learning.
 This project is part of Udacity - Google Developer Challenge Scholarship : Android Basics and makes use of different technics to bring edition comfort. Amazingly all the files that you need to edit to have a completelly different scenario is questions.json and arrays.xml files. 
-This app uses sound effects from "https://www.zapsplat.com“, thank's to zapsplat for this amazing sound effects.
-sound effects.
+ This app also uses sound effects from "https://www.zapsplat.com“, thank's to zapsplat for this amazing sound effects.
 
 **Edit Instructions:**
 
@@ -27,7 +26,7 @@ sound effects.
 
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/ArraysPath.PNG" alt="How to add, edit and remove levels image" title="How to add, edit and remove levels" />
 
-<h4 name="edit_level_strings">Edit level strings</h4>
+<h3 name="edit_level_strings">Edit level strings</h3>
 
 <p>Resources fast edition...<p>
 <p>Add, remove or edit level names, scores, earnings and more just in one file, <b>arrays.xml</b> file</p>
@@ -37,9 +36,9 @@ sound effects.
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/IconsFastEdition.PNG" alt="How to edit, add or remove level icons image" title="How to edit, add or remove level icons" />
 
 
-<h4 name="edit_questions">Edit questions</h4>
+<h3 name="edit_questions">Edit questions</h3>
 
-<h3 name="add_edit_or_remove_questions">Add, edit or remove questions</h3>
+<h4 name="add_edit_or_remove_questions">Add, edit or remove questions</h4>
 <p>Add, edit and remove questions in a simple way through a json file called question.json that is stored in assets folder.</p>
 
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/JSONQuestionsFilePath.PNG" alt="How to add and remove questions image" title="How to add, edit and remove questions" />
