@@ -52,5 +52,6 @@
     <string name="clean_progress">Clean</string>
     <string name="level_passed_dialog_ok_button">OK</string>
     <string name="failed_question_content_description">Failed question icon</string>
+    <string name="share_your_score">Share</string>
 
 </resources>
