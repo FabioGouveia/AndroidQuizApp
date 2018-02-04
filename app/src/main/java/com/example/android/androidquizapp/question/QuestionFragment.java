@@ -166,6 +166,9 @@ public class QuestionFragment extends Fragment {
         this.question = level.getQuestion(questionIndex);
     }
 
+    /**
+     * This method starts the layout construction
+     **/
     private void startAnswerPanelConstruction(){
         switch(question.getType()){
             case TEXTUAL:
@@ -459,9 +462,16 @@ public class QuestionFragment extends Fragment {
                 Intent shareIntent = new Intent(Intent.ACTION_SEND);
                 shareIntent.setType("text/plain");
 
-                //Set the extras
+                //Message to share
+                String message = "I have passed the level " + level.getName().toLowerCase() + " on AndroidQuizApp " +
+                        "with a progress of " + level.getScore() +
+                        "% and a total of " + level.getNumberOfPassedQuestions() +
+                        " questions passed against " + level.getTotalWrongAnswers() +
+                        " failed questions. Know more on: https://github.com/FabioGouveia/AndroidQuizApp";
+
+                //Set the extras with a subject in case of email and message
                 shareIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_intent_subject, level.getName().toLowerCase()));
-                shareIntent.putExtra(Intent.EXTRA_TEXT, "Testing...");
+                shareIntent.putExtra(Intent.EXTRA_TEXT, message);
 
                 //Start intent with a chooser
                 startActivity(Intent.createChooser(shareIntent, (getResources().getString(R.string.share_your_score) + " via")));
