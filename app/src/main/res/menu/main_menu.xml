@@ -8,14 +8,10 @@
 
         <!-- Submenu -->
         <menu>
-            <!-- see progress -->
-            <item
-                android:id="@+id/main_menu_progress"
-                android:title="@string/main_menu_progress" />
 
             <!-- Sow initial slide check box -->
             <item
-                android:id="@+id/show_animation_checkbox"
+                android:id="@+id/play_initial_slide_checkbox"
                 android:checkable="true"
                 android:title="@string/main_menu_slide" />
 
@@ -24,6 +20,12 @@
                 android:id="@+id/play_sound_effects_checkbox"
                 android:checkable="true"
                 android:title="@string/main_menu_sound" />
+
+            <!-- see progress -->
+            <item
+                android:id="@+id/main_menu_progress"
+                android:title="@string/main_menu_progress" />
+
         </menu>
 
     </item>
