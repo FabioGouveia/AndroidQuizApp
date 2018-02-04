@@ -10,15 +10,23 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+
+import static android.content.Context.MODE_PRIVATE;
+import static com.example.android.androidquizapp.utils.QueryUtils.StorageMode.INTERNAL;
 
 /**
- * Created by Android on 24-01-2018.
+ * {@link JsonUtils} class works as a helper to JSON jobs in the app.
+ *
+ * @author Fábio Gouveia
+ * @version 1.0
  */
 
-public final class JsonUtils {
+final class JsonUtils {
 
     //Level data persistent file name static placeholder.
-    static final String JSON_DATA_FILE = "questions.json";
+    private static final String JSON_DATA_FILE = "questions.json";
 
     /**
      * Create a private constructor because no one should ever create a {@link JsonUtils} object.
@@ -39,7 +47,7 @@ public final class JsonUtils {
      *
      * @return JSONObject - A JSONObject representing the level questions.
      */
-    public static JSONObject jsonFileToJSONObject(Context context, QueryUtils.StorageMode mode) throws IOException, JSONException {
+    static JSONObject jsonFileToJSONObject(Context context, QueryUtils.StorageMode mode) throws IOException, JSONException {
 
         //An input stream to help us read json files
         InputStream inputStream = null;
@@ -63,18 +71,17 @@ public final class JsonUtils {
      * The convertJsonObjectToQuestionObject method is used to convert a JSON object into a Question object.
      *
      * @param jsonQuestion - A {@link JSONObject}.
-     *
      * @return Question - A {@link Question} object.
-     *
      * @throws JSONException - A {@link JSONException} if something wrong happen with JSON process.
      *
      * @see Question
      */
-    public static Question convertJsonObjectToQuestionObject(JSONObject jsonQuestion) throws JSONException {
+    static Question convertJsonObjectToQuestionObject(JSONObject jsonQuestion) throws JSONException {
 
         JSONArray possibleAnswersArray = jsonQuestion.getJSONArray("options");
         String question = jsonQuestion.getString("question");
         String tip = jsonQuestion.getJSONArray("tip").getString(0);
+        String tipWebAddress = jsonQuestion.getJSONArray("tip").getString(1);
         boolean passed = jsonQuestion.getBoolean("passed");
         int wrongAnswers = jsonQuestion.getInt("wrongAnswers");
 
@@ -88,6 +95,73 @@ public final class JsonUtils {
             rightAnswersIndex[i] = possibleAnswersArray.getJSONArray(i).getBoolean(1);
         }
 
-        return new Question(question, tip, possibleAnswers, rightAnswersIndex, passed, wrongAnswers).addOnQuestionPassedListener(new QueryUtils.SaveOnQuestionAttemptedListener());
+        String textualUserAnswer = null;
+
+        //If the number of possible answers is equal to one, this is a textual answer
+        if (numberOfPossibleAnswers == 1) {
+            textualUserAnswer = jsonQuestion.getString("rightAnswer");
+        }
+
+        //return a new question
+        return new Question(question, tip, tipWebAddress, possibleAnswers, rightAnswersIndex, passed, wrongAnswers, textualUserAnswer).addOnQuestionPassedListener(new QueryUtils.SaveOnQuestionAttemptedListener());
+    }
+
+    private static JSONObject constructInitialJSONPersistentObject(Context context, int levelNameResourceArray) throws IOException, JSONException {
+
+        JSONObject questionsObject = JsonUtils.jsonFileToJSONObject(context, INTERNAL);
+        String[] levelNameArray = context.getResources().getStringArray(levelNameResourceArray);
+
+        //Create default question state values
+        for (String name : levelNameArray) {
+            JSONArray level = questionsObject.getJSONArray(name.toLowerCase());
+
+            int numQuestions = level.length();
+            for (int i = 0; i < numQuestions; i++) {
+
+                //Check if is a textual answer question
+                if (level.getJSONObject(i).getJSONArray("options").length() == 1) {
+                    level.getJSONObject(i).put("rightAnswer", "null");
+                }
+
+                level.getJSONObject(i).put("passed", false);
+                level.getJSONObject(i).put("wrongAnswers", 0);
+            }
+        }
+
+        return questionsObject;
+    }
+
+    /**
+     * The writePersistentJSONFile method is used to write persistent JSON data
+     * to a file on private app data folder.
+     *
+     * @param context                - The application context.
+     * @param levelNameResourceArray - Level names resource array, this level is maintained in arrays.xml file
+     * @throws IOException - Input / Output exceptions is thrown.
+     * @see IOException
+     */
+    static void writePersistentJSONObject(Context context, int levelNameResourceArray) throws IOException, JSONException {
+
+        OutputStream fileOut = context.openFileOutput(JsonUtils.JSON_DATA_FILE, MODE_PRIVATE);
+        OutputStreamWriter writer = new OutputStreamWriter(fileOut, "UTF-8");
+        writer.write(constructInitialJSONPersistentObject(context, levelNameResourceArray).toString());
+        writer.close();
+    }
+
+    /**
+     * The writePersistentJSONFile method is used to write persistent JSON data
+     * to a file on private app data folder.
+     *
+     * @param context      - The application context.
+     * @param objectToSave - The JSONObject up to date and ready for save.
+     * @throws IOException - Input / Output exceptions is thrown.
+     * @see IOException
+     */
+    static void writePersistentJSONObject(Context context, JSONObject objectToSave) throws IOException, JSONException {
+
+        OutputStream fileOut = context.openFileOutput(JsonUtils.JSON_DATA_FILE, MODE_PRIVATE);
+        OutputStreamWriter writer = new OutputStreamWriter(fileOut, "UTF-8");
+        writer.write(objectToSave.toString());
+        writer.close();
     }
 }
