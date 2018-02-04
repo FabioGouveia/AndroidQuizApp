@@ -5,10 +5,10 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 **Edit Instructions:**
 
 
-<select>
-    <option><a href="#add_or_remove_questions" title="How to add or remove a question">Add or remove questions</a></option>
-    <option><a href="#edit_questions" title="How to edit a question">Edit questions</a></option>
-</select>
+<ul>
+    <li><a href="#add_or_remove_questions" title="How to add or remove a question">Add or remove questions</a></li>
+    <li><a href="#edit_questions" title="How to edit a question">Edit questions</a></li>
+</ul>
 
 
 <h4 name="add_or_remove_questions">**Add or remove questions**</h4>
@@ -19,8 +19,10 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 
 
 <h4 name="edit_questions">**Edit questions**</h4>
-JSON fast question edition...
+<p>JSON fast question edition...<p>
+<p>Add a question and simple turn your questions in multiple choice, one choice and textual questions by editing boolean second parameter on <i>options</i> JSON array.</p>
 
+<p>Set up multiple answer, one choice question</p>
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/JSONQuestionObject.PNG" alt="How to edit a questions link" title="How to edit a questions" />
 
 This app uses nice sound effects from "https://www.zapsplat.com“, thank's to zapsplat for this amazing
