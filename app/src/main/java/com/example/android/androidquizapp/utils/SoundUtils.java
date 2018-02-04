@@ -128,7 +128,7 @@ public final class SoundUtils {
         final SharedPreferences prefs = context.getSharedPreferences(QueryUtils.PREFERENCES_FILE, Context.MODE_PRIVATE);
 
         //User want's to play sound effects?
-        return prefs.getBoolean(QueryUtils.PLAY_SOUND_EFFECT_KEY, true);
+        return prefs.getBoolean(QueryUtils.PLAY_SOUND_EFFECTS_KEY, true);
     }
 
     /**
