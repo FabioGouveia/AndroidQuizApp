@@ -15,13 +15,13 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 <p>Add and remove levels in a simple way through a json file called question.json that is stored in assets folder.</p>
 
 
-<img src="https://github.com/AndroidQuizApp/blob/master/images/JSONQuestionsFilePath.PNG" alt="How to add and remove questions link" title="How to add and remove questions" />
+<img src="https://github.com/AndroidQuizApp/blob/master/images/edition/JSONQuestionsFilePath.PNG" alt="How to add and remove questions link" title="How to add and remove questions" />
 
 
 <h4 name="edit_questions">**Edit questions**</h4>
 JSON fast question edition...
 
-<img src="https://github.com/AndroidQuizApp/blob/master/images/JSONQuestionObject.PNG" alt="How to edit a questions link" title="How to edit a questions" />
+<img src="https://github.com/AndroidQuizApp/blob/master/images/edition/JSONQuestionObject.PNG" alt="How to edit a questions link" title="How to edit a questions" />
 
 This app uses nice sound effects from "https://www.zapsplat.com“, thank's to zapsplat for this amazing
 sound effects.
