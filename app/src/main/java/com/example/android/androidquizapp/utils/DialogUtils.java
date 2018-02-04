@@ -148,6 +148,12 @@ public class DialogUtils extends DialogFragment {
                     public void onClick(DialogInterface dialog, int which) {
                         DialogUtils.this.getDialog().cancel();
                     }
+                })
+                .setNeutralButton(R.string.share_your_score, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        listener.onPositiveButtonClicked();
+                    }
                 });
         return builder;
     }
@@ -211,4 +217,5 @@ public class DialogUtils extends DialogFragment {
             super(e);
         }
     }
+
 }
