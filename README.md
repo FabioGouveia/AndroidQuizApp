@@ -1,6 +1,8 @@
 # AndroidQuizApp
 This is a fully customizable quiz app made with a lot of effort and focused on learning.
 This project is part of Udacity - Google Developer Challenge Scholarship : Android Basics and makes use of different technics to bring edition comfort. Amazingly all the files that you need to edit to have a completelly different scenario is questions.json and arrays.xml files. 
+This app uses sound effects from "https://www.zapsplat.com“, thank's to zapsplat for this amazing sound effects.
+sound effects.
 
 **Edit Instructions:**
 
@@ -8,15 +10,20 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 <ul>
     <li><a href="#add_edit_or_remove_levels" title="How to add, edit or remove a level">Add, edit or remove a level</a></li>
     <li><a href="#edit_level_strings" title="How can I add, edit or remove level strings">How can I add, edit or remove level strings</a></li>
+    <li><a href="#setup_level_icons" title="How can I add, edit or remove level icons">How can I add, edit or remove level icons</a></li>
     <li><a href="#add_edit_or_remove_questions" title="How to add, edit or remove a question">Add, edit or remove questions</a></li>
     <li><a href="#setup_multiple_choice_question" title="How to add or edit a multiple choice question">How can I setup a multiple choice question</a></li>
     <li><a href="#setup_one_choice_question" title="How to add or edit one choice questions">How can I setup one choice questions</a></li>
     <li><a href="#setup_yes_or_no_question" title="How to add or edit yes/no questions">How can I add or edit yes/no questions</a></li>
     <li><a href="#setup_textual_question" title="How to add textual questions">How can I add textual questions</a></li>
+    <li><a href="#setup_textual_question" title="How to add textual questions">How can I add, remove and edit sound effects</a></li>
 </ul>
 
+<h2>Adapt to your needs</h2>
+<img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/ResourcesEditionPath.PNG" alt="Adaptable application image" title="Adaptable application" />
+
 <h3 name="add_edit_or_remove_levels">Add, edit or remove levels</h3>
-<p>Add, edit and remove levels in a simple way through a xml file called arrays.xml that is stored in values folder.</p>
+<p>Add, edit and remove levels in a simple way through a xml file called arrays.xml stored in values folder.</p>
 
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/ArraysPath.PNG" alt="How to add, edit and remove levels image" title="How to add, edit and remove levels" />
 
@@ -26,9 +33,9 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 <p>Add, remove or edit level names, scores, earnings and more just in one file, <b>arrays.xml</b> file</p>
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/FastResourcesEdition.PNG" alt="How to add, remove or edit level strings image" title="How to add, remove or edit level strings" />
 
-
 <p name="setup_level_icons">Setup your level icons with enabled and disabled state...</p>
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/IconsFastEdition.PNG" alt="How to edit, add or remove level icons image" title="How to edit, add or remove level icons" />
+
 
 <h4 name="edit_questions">Edit questions</h4>
 
@@ -56,5 +63,6 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/TextualQuestionEdition.PNG" alt="How to setup a textual question image" title="How to add a textual question" />
 <p>Add the possible answer as an array of strings separated by commas...</p>
 
-This app uses nice sound effects from "https://www.zapsplat.com“, thank's to zapsplat for this amazing
-sound effects.
+<p name="setup_sound_effects">Setup your sound effects.</p>
+<img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/SoundsPath.PNG" alt="How to edit, add or remove sound effects image" title="How to edit, add or remove sound effects" />
+Sound effects from "https://www.zapsplat.com“
