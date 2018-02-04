@@ -51,8 +51,8 @@
          unlock the level and get the earnings -->
     <integer-array name="score_required_to_unlock">
         <item>60</item><!-- Beginner level -->
-        <item>75</item><!-- Amateur level -->
-        <item>85</item><!-- Professional level -->
+        <item>70</item><!-- Amateur level -->
+        <item>80</item><!-- Professional level -->
         <item>100</item><!-- Advanced level -->
     </integer-array>
 
