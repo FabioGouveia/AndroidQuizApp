@@ -97,11 +97,11 @@ public class LevelSelectionActivity extends AppCompatActivity {
     public boolean onPrepareOptionsMenu(Menu menu) {
 
         //Initialize menu checkable items
-        MenuItem showSlideCheckableItem = menu.findItem(R.id.show_animation_checkbox);
+        MenuItem showSlideCheckableItem = menu.findItem(R.id.play_initial_slide_checkbox);
         MenuItem playSoundCheckableItem = menu.findItem(R.id.play_sound_effects_checkbox);
 
         //Change show animation checkbox to checked state depending on user preferences.
-        if (userPreferences.getBoolean(QueryUtils.ANIMATION_ON_START_KEY, true)) {
+        if (userPreferences.getBoolean(QueryUtils.PLAY_INITIAL_SLIDE_KEY, true)) {
 
             //User want's to see the animation on application start
             showSlideCheckableItem.setChecked(true);
@@ -111,7 +111,7 @@ public class LevelSelectionActivity extends AppCompatActivity {
         }
 
         //Change play sound effects checkbox to checked state depending on user preferences.
-        if (userPreferences.getBoolean(QueryUtils.PLAY_SOUND_EFFECT_KEY, true)) {
+        if (userPreferences.getBoolean(QueryUtils.PLAY_SOUND_EFFECTS_KEY, true)) {
 
             //User want's to see the animation on application start
             playSoundCheckableItem.setChecked(true);
@@ -131,16 +131,16 @@ public class LevelSelectionActivity extends AppCompatActivity {
                 this.startActivity(new Intent(this, LevelStatisticsActivity.class));
                 animateOpenStatisticsActivityTransition();
                 break;
-            case R.id.show_animation_checkbox:
+            case R.id.play_initial_slide_checkbox:
 
                 //When user click's the check box is checked
                 if(item.isChecked()){
                     //If the box is checked when the user click's, so the user want's to un-check the box and stop showing the initial slide show
-                    userPreferences.edit().putBoolean(QueryUtils.ANIMATION_ON_START_KEY, false).apply();
+                    userPreferences.edit().putBoolean(QueryUtils.PLAY_INITIAL_SLIDE_KEY, false).apply();
                     invalidateOptionsMenu();//Refresh options menu
                 }else{
                     //If the box is unchecked when the user click's, so the user want's to check the box and start's showing the initial slide show
-                    userPreferences.edit().putBoolean(QueryUtils.ANIMATION_ON_START_KEY, true).apply();
+                    userPreferences.edit().putBoolean(QueryUtils.PLAY_INITIAL_SLIDE_KEY, true).apply();
                     invalidateOptionsMenu();//Refresh options menu
                 }
                 break;
@@ -149,11 +149,11 @@ public class LevelSelectionActivity extends AppCompatActivity {
                 //When user click's the check box is checked
                 if (item.isChecked()) {
                     //If the box is checked when the user click's, so the user want's to un-check the box and stop playing sound effects
-                    userPreferences.edit().putBoolean(QueryUtils.PLAY_SOUND_EFFECT_KEY, false).apply();
+                    userPreferences.edit().putBoolean(QueryUtils.PLAY_SOUND_EFFECTS_KEY, false).apply();
                     invalidateOptionsMenu();//Refresh options menu
                 } else {
                     //If the box is unchecked when the user click's, so the user want's to check the box and start's playing sound effects
-                    userPreferences.edit().putBoolean(QueryUtils.PLAY_SOUND_EFFECT_KEY, true).apply();
+                    userPreferences.edit().putBoolean(QueryUtils.PLAY_SOUND_EFFECTS_KEY, true).apply();
                     invalidateOptionsMenu();//Refresh options menu
                 }
                 break;
