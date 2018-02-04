@@ -7,6 +7,7 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 
 <ul>
     <li><a href="#add_edit_or_remove_levels" title="How to add, edit or remove a level">Add, edit or remove a level</a></li>
+    <li><a href="#edit_level_strings" title="How can I add, edit or remove level strings">How can I add, edit or remove level strings</a></li>
     <li><a href="#add_edit_or_remove_questions" title="How to add, edit or remove a question">Add, edit or remove questions</a></li>
     <li><a href="#setup_multiple_choice_question" title="How to add or edit a multiple choice question">How can I setup a multiple choice question</a></li>
     <li><a href="#setup_one_choice_question" title="How to add or edit one choice questions">How can I setup one choice questions</a></li>
@@ -17,13 +18,24 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 <h3 name="add_edit_or_remove_levels">Add, edit or remove levels</h3>
 <p>Add, edit and remove levels in a simple way through a xml file called arrays.xml that is stored in values folder.</p>
 
+<img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/ArraysPath.PNG" alt="How to add, edit and remove levels image" title="How to add, edit and remove levels" />
+
+<h4 name="edit_level_strings">Edit level strings</h4>
+
+<p>Resources fast edition...<p>
+<p>Add, remove or edit level names, scores, earnings and more just in one file, <b>arrays.xml</b> file</p>
+<img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/FastResourcesEdition.PNG" alt="How to add, remove or edit level strings image" title="How to add, remove or edit level strings" />
+
+
+<p name="setup_level_icons">Setup your level icons with enabled and disabled state...</p>
+<img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/IconsFastEdition.PNG" alt="How to edit, add or remove level icons image" title="How to edit, add or remove level icons" />
+
+<h4 name="edit_questions">Edit questions</h4>
+
 <h3 name="add_edit_or_remove_questions">Add, edit or remove questions</h3>
 <p>Add, edit and remove questions in a simple way through a json file called question.json that is stored in assets folder.</p>
 
-<img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/JSONQuestionsFilePath.PNG" alt="How to add and remove questions image" title="How to add and remove questions" />
-
-
-<h4 name="edit_questions">Edit questions</h4>
+<img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/JSONQuestionsFilePath.PNG" alt="How to add and remove questions image" title="How to add, edit and remove questions" />
 
 <p>JSON fast question edition...<p>
 <p>Add a question and simple turn your questions in multiple choice, one choice and textual questions by editing boolean second parameter on <i>options</i> JSON array.</p>
