@@ -168,7 +168,11 @@ public class Level implements Parcelable {
         return requiredToUnlock;
     }
 
-    //TODO: Comment this method...
+    /**
+     * Return a {@code double} representing the percentage required to pass this level.
+     *
+     * @return a <tt>double</tt> representing the percentage required to pass this level.
+     */
     double getPercentageRequiredToPass(){
         return percentageRequiredToPass;
     }
@@ -214,9 +218,7 @@ public class Level implements Parcelable {
     }
 
     /**
-     * This method returns a {@code boolean} representation for this level passed state.
      * Returns {@code true} if the level has been passed and {@code false} if not.
-     *
      * @return <tt>boolean</tt> representing if the level has been passed
      */
     public boolean isPassed() {
@@ -245,7 +247,10 @@ public class Level implements Parcelable {
         return score;
     }
 
-    //Private method to help us know the value per question in percentage.
+    /**
+     * Return {@code int} representing the percentage earned per question.
+     * @return a <tt>int</tt> representing the percentage earned per question.
+     */
     private int percentagePerQuestion(){
         return questions.size() <= 100 ? 100 / questions.size() : (int)(questions.size() * 0.100f);}
 
