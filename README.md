@@ -8,9 +8,9 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 <h2>Application show room</h2>
 
 <div>
-<img style="float:left" src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/vertical/MainScreen.PNG" alt="" title="" />
-<img style="float:left" src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/vertical/MainScreen2.PNG" alt="" title="" />
-<img style="float:left" src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/vertical/MainScreenCompleted.PNG" alt="" title="" />
+<img style="float:left" src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/app/vertical/MainScreen.PNG" alt="" title="" />
+<img style="float:left" src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/app/vertical/MainScreen2.PNG" alt="" title="" />
+<img style="float:left" src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/app/vertical/MainScreenCompleted.PNG" alt="" title="" />
 </div>
 
 
