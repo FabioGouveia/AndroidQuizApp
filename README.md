@@ -7,7 +7,7 @@ This project is part of Udacity - Google Developer Challenge Scholarship : Andro
 
 <h2>Application show room</h2>
 
-<img style="float:left" src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/app/horizontal/ShowRoom.PNG" alt="" title="" />
+<img style="float:left" src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/app/horizontal/ShowRoom.png" alt="" title="" />
 
 **Edit Instructions:**
 
