@@ -1,14 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:padding="16dp"
-    android:orientation="vertical" >
+    style="@style/StatisticsItemRootView">
 
     <TextView
         android:id="@+id/progressbarLabel"
-        android:textAppearance="?android:textAppearanceMedium"
-        style="@style/LevelProgressbarLabel"/>
+        style="@style/LevelProgressbarLabel"
+        android:textAppearance="?android:textAppearanceMedium" />
 
     <ProgressBar
         android:id="@+id/progressbar"
@@ -23,9 +20,9 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textAllCaps="true"
             android:gravity="center"
-            android:text="@string/level_locked"/>
+            android:text="@string/level_locked"
+            android:textAllCaps="true" />
 
     </RelativeLayout>
 
@@ -33,7 +30,6 @@
         android:id="@+id/progress_info_panel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/level_card_footer_bgd"
         android:orientation="vertical">
 
         <TextView
@@ -41,14 +37,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@color/colorPrimaryText"/>
+            android:textColor="@color/colorSecondaryText" />
 
         <TextView
             android:id="@+id/num_questions_passed_text_view"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textAppearance="?android:textAppearanceSmall"
-            android:textColor="@color/colorPrimaryText"/>
+            android:textColor="@color/colorSecondaryText" />
 
     </LinearLayout>
 
