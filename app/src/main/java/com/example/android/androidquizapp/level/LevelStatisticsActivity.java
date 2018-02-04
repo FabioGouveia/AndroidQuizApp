@@ -30,13 +30,16 @@ public class LevelStatisticsActivity extends AppCompatActivity {
     private Level level;
     private SharedPreferences preferences;
     private boolean progressErased;
-
+    private DialogUtils confirmActionDialog;
     private LevelStatisticsAdapter statisticsAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level_statistics);
+
+        //Get application shared preferences.
+        preferences = getSharedPreferences(QueryUtils.PREFERENCES_FILE, MODE_PRIVATE);
 
         if (savedInstanceState != null) {
             //Set the class loader to load a Parcelable object.
@@ -46,9 +49,6 @@ public class LevelStatisticsActivity extends AppCompatActivity {
             //Set the progress erased state to the last saved state
             progressErased = savedInstanceState.getBoolean(Level.PROGRESS_ERASED_KEY);
         } else {
-
-            //Get application shared preferences.
-            preferences = getSharedPreferences(QueryUtils.PREFERENCES_FILE, MODE_PRIVATE);
 
             //Get progress was erased status for the first time only
             progressErased = preferences.getBoolean(QueryUtils.PROGRESS_ERASED_KEY, false);
@@ -83,6 +83,8 @@ public class LevelStatisticsActivity extends AppCompatActivity {
         ListView statisticsList  = findViewById(R.id.level_statistics_list);
         statisticsList.setAdapter(statisticsAdapter);
 
+        //Create the confirmation dialog
+
     }
 
     @Override
@@ -108,7 +110,7 @@ public class LevelStatisticsActivity extends AppCompatActivity {
                 //Check if the progress was erased
                 if (!progressErased) {
                     //Create a confirmation dialog
-                    DialogUtils confirmActionDialog = new DialogUtils();
+                    confirmActionDialog = new DialogUtils();
                     confirmActionDialog.setType(DialogUtils.Type.CONFIRM_DIALOG);
                     confirmActionDialog.setArguments(confirmBundle);
 
@@ -117,32 +119,7 @@ public class LevelStatisticsActivity extends AppCompatActivity {
                         @Override
                         public void onPositiveButtonClicked() {
                             //Erase the level progress after a successful user confirmation.
-                            if (level != null) {
-                                for (Question question : level.getQuestions()) {
-                                    question.resetProgress();
-                                }
-
-                                //Level state erased
-                                level = null;
-                            }
-
-                            //Erase persistent level progress.
-                            QueryUtils.cleanProgress(getApplicationContext(), QueryUtils.createLevels(getApplicationContext()));
-
-                            //Update statistics list.
-                            statisticsAdapter.clear();
-                            statisticsAdapter.addAll(QueryUtils.createLevels(getApplicationContext()));
-                            statisticsAdapter.notifyDataSetChanged();
-
-
-                            //Progress cleaned
-                            Toast.makeText(getApplicationContext(), "Your progress was successfully cleaned!", Toast.LENGTH_SHORT).show();
-
-                            //Set persistent progress erased state to true
-                            preferences.edit().putBoolean(QueryUtils.PROGRESS_ERASED_KEY, true).apply();
-
-                            //Set progress erased to true
-                            progressErased = true;
+                            cleanProgress();
                         }
                     });
                     //Show the confirmation dialog.
@@ -177,7 +154,50 @@ public class LevelStatisticsActivity extends AppCompatActivity {
         super.onSaveInstanceState(outState);
     }
 
-    //User wants to leave
+    @Override
+    protected void onPause() {
+        super.onPause();
+        //Remove the dialog if exists
+        if (confirmActionDialog != null) {
+            confirmActionDialog.dismiss();
+        }
+    }
+
+    /**
+     * This method cleans all progress
+     **/
+    private void cleanProgress() {
+        if (level != null) {
+            for (Question question : level.getQuestions()) {
+                question.resetProgress();
+            }
+
+            //Level state erased
+            level = null;
+        }
+
+        //Erase persistent level progress.
+        QueryUtils.cleanProgress(getApplicationContext(), QueryUtils.createLevels(getApplicationContext()));
+
+        //Update statistics list.
+        statisticsAdapter.clear();
+        statisticsAdapter.addAll(QueryUtils.createLevels(getApplicationContext()));
+        statisticsAdapter.notifyDataSetChanged();
+
+
+        //Progress cleaned
+        Toast.makeText(getApplicationContext(), "Your progress was successfully cleaned!", Toast.LENGTH_SHORT).show();
+
+        //Set persistent progress erased state to true
+        preferences.edit().putBoolean(QueryUtils.PROGRESS_ERASED_KEY, true).apply();
+
+        //Set progress erased to true
+        progressErased = true;
+    }
+
+    /**
+     * This method exits this activity
+     **/
     private void leaveThisActivityProcess(){
         //Progress was erased, can't go back to questions, some levels are locked now
         if(level != null){
@@ -201,5 +221,18 @@ public class LevelStatisticsActivity extends AppCompatActivity {
     //This method help us overriding android pending transitions between activities when leave this activity to the level selection activity.
     private void animateBackActivityTransition(){
         overridePendingTransition(R.anim.enter_activity_questions_animation, R.anim.exit_activity_questions_animation);
+    }
+
+    @Override
+    protected void onDestroy() {
+        //Clean the variables for memory reuse
+        preferences = null;
+        confirmActionDialog = null;
+        statisticsAdapter = null;
+
+        //Inform garbage collector that can collect old variables
+        System.gc();
+
+        super.onDestroy();
     }
 }
