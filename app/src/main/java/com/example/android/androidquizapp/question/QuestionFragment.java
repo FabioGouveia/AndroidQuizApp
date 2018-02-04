@@ -451,6 +451,23 @@ public class QuestionFragment extends Fragment {
         levelPassedDialog.setType(DialogUtils.Type.LEVEL_PASSED_ALERT_DIALOG);
         levelPassedDialog.setArguments(levelPassedArguments);
 
+        //Add a listener to know when the user wants to share the score
+        levelPassedDialog.setOnPositiveButtonClickedListener(new DialogUtils.OnPositiveButtonClickedListener() {
+            @Override
+            public void onPositiveButtonClicked() {
+                //Create an Intent to share user score
+                Intent shareIntent = new Intent(Intent.ACTION_SEND);
+                shareIntent.setType("text/plain");
+
+                //Set the extras
+                shareIntent.putExtra(Intent.EXTRA_SUBJECT, getResources().getString(R.string.share_intent_subject, level.getName().toLowerCase()));
+                shareIntent.putExtra(Intent.EXTRA_TEXT, "Testing...");
+
+                //Start intent with a chooser
+                startActivity(Intent.createChooser(shareIntent, (getResources().getString(R.string.share_your_score) + " via")));
+            }
+        });
+
         //Show the dialog
         levelPassedDialog.show(getFragmentManager(), null);
 
