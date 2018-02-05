@@ -15,10 +15,7 @@ import com.example.android.androidquizapp.utils.QueryUtils;
 
 /**
  * The {@link MainActivity} class extends {@link AppCompatActivity} and represents
- * the the app starting point activity.
- *
- * TODO: Complete this header
- * TODO: Review the animation time
+ * the app starting point activity
  *
  * @author Fábio Miguel dos Santos Gouveia
  * @version 1.0
@@ -141,7 +138,9 @@ public class MainActivity extends AppCompatActivity {
         System.gc();
     }
 
-    //Change the animation text value
+    /**
+     * Change the animation text value
+     **/
     private void changeAnimationText(){
         switch(animationCurrentPosition){
             case 2:
@@ -157,7 +156,7 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    //Start select difficulty level activity
+    /** Start select difficulty level activity **/
     private void startDifficultyLevelActivity() {
         startActivity(new Intent(this, LevelSelectionActivity.class));
         overridePendingTransition(R.anim.enter_activity_animation, R.anim.exit_activity_animation);
@@ -167,6 +166,13 @@ public class MainActivity extends AppCompatActivity {
     * Private inner class implementing AnimationListener;
     * Costume listener to listen the animation changes;
     */
+
+    /**
+     * The private inner {@link CostumeAnimationListener} implements Animation.AnimationListener
+     * and is useful to listen animation changes.
+     *
+     * @see Animation.AnimationListener
+     */
     private class CostumeAnimationListener implements  Animation.AnimationListener{
 
         @Override
