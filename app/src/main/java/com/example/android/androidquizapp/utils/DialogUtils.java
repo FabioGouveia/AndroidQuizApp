@@ -90,15 +90,18 @@ public class DialogUtils extends DialogFragment {
 
         //Verify if the type is set, if not throw an exception.
         if(type != null){
-            //Verify the type TODO: Test if Dialog exceptions work...
+            //Verify the type
             switch (type){
                 case CONFIRM_DIALOG: return createConfirmationDialog(builder);
                 case LEVEL_PROGRESS_DIALOG:
                     return buildStatisticDialog(builder);
                 case LEVEL_PASSED_ALERT_DIALOG:
                     return createLevelPassedAlertDialog(builder);
+
+                //Not recognized type, throw an exception..!
                 default: throw new DialogException("Incompatible type!");
             }
+            //Type not found..! We can't continue
         }else{ throw new DialogException("Type not found!");
         }
     }
