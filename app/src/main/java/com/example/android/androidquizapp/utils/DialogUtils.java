@@ -146,18 +146,17 @@ public class DialogUtils extends DialogFragment {
 
         builder.setTitle(getResources().getString(R.string.level_passed_dialog_title))
                 .setMessage(levelPassedMessage)
-                .setPositiveButton(R.string.level_passed_dialog_ok_button, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        DialogUtils.this.getDialog().cancel();
-                    }
-                })
                 .setNeutralButton(R.string.share_your_score, new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         listener.onPositiveButtonClicked();
                     }
-                });
+                }).setNegativeButton(R.string.cancel_dialog, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                DialogUtils.this.getDialog().cancel();
+            }
+        });
         return builder;
     }
 
