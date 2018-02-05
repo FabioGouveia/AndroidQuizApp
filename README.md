@@ -63,7 +63,7 @@ See more images on <a href="https://github.com/FabioGouveia/AndroidQuizApp/wiki"
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/OneChoiceMultipleAnswers.PNG" alt="How to edit a multiple answer, one choice question image" title="How to edit a multiple answer, one choice question" />
 
 
-<p name="setup_yes_or_no_question">Add a <i>yes</i> or <i>no</i> question by adding just two to elements to the <i>options</i> array.</p>
+<p name="setup_yes_or_no_question">Add a <i>yes</i> or <i>no</i> question by adding just two elements to the <i>options</i> array.</p>
 <img src="https://github.com/FabioGouveia/AndroidQuizApp/blob/master/images/edition/YesOrNoQuestion.PNG" alt="How to edit a yes or no question image" title="How to edit or add a yes or no question" />
 
 
