@@ -239,6 +239,7 @@
     <style name="QuestionTextView">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:padding">@dimen/dimen_l</item>
     </style>
 
@@ -268,9 +269,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_below">@id/question_text_view</item>
-        <item name="android:layout_marginLeft">@dimen/answers_holder_margin</item>
+        <item name="android:paddingLeft">@dimen/answers_holder_margin</item>
         <item name="android:layout_marginTop">@dimen/answers_holder_margin</item>
-        <item name="android:layout_marginRight">@dimen/answers_holder_margin</item>
+        <item name="android:paddingRight">@dimen/answers_holder_margin</item>
         <item name="android:visibility">gone</item>
     </style>
 
@@ -283,6 +284,7 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textAppearance">?android:radioButtonStyle</item>
+        <item name="android:textSize">@dimen/answers_item_text_dimension</item>
         <item name="android:visibility">gone</item>
     </style>
 

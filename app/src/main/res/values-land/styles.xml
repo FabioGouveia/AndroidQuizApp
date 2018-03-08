@@ -67,8 +67,9 @@
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
         <item name="android:layout_below">@id/multiple_choice_question_hint_textView</item>
-        <item name="android:layout_marginLeft">@dimen/dimen_s</item>
+        <item name="android:paddingLeft">@dimen/answers_holder_margin</item>
         <item name="android:layout_marginTop">@dimen/answers_holder_margin</item>
+        <item name="android:paddingRight">@dimen/answers_holder_margin</item>
         <item name="android:visibility">gone</item>
     </style>
 
@@ -82,22 +83,6 @@
         <item name="android:textAppearance">?android:textAppearanceSmall</item>
         <item name="android:text">@string/multiple_choice_hint</item>
         <item name="android:visibility">gone</item>
-    </style>
-
-    <style name="AnswersHolder.checkBox">
-        <item name="android:layout_marginTop">@dimen/answers_holder_checkbox_margin_top</item>
-        <item name="android:orientation">vertical</item>
-    </style>
-
-    <style name="AnswersHolderItem">
-        <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">wrap_content</item>
-        <item name="android:textAppearance">?android:radioButtonStyle</item>
-        <item name="android:visibility">gone</item>
-    </style>
-
-    <style name="AnswersHolderItem.CheckBox">
-        <item name="android:textAppearance">?android:checkboxStyle</item>
     </style>
 
     <style name="TextualAnswerLayout" parent="Widget.Design.TextInputLayout">
