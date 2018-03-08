@@ -51,7 +51,13 @@ public class LevelSelectionActivity extends AppCompatActivity {
         RecyclerView difficultyLevelList = findViewById(R.id.difficulty_level_list);
 
         //Initialize a layout manager required to work with a RecyclerView.
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false) {
+
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
 
         //Check device orientation to know how to display the cards and how the recycler layout manager should act
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
