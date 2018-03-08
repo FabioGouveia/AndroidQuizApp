@@ -28,6 +28,7 @@
     <dimen name="multiple_choice_hint_margin_top">@dimen/dimen_s</dimen>
     <dimen name="answers_holder_margin">@dimen/dimen_m</dimen>
     <dimen name="answers_holder_checkbox_margin_top">@dimen/dimen_l</dimen>
+    <dimen name="answers_item_text_dimension">12sp</dimen>
     <dimen name="answer_button_margin_bottom">@dimen/dimen_m</dimen>
     <dimen name="passed_question_label_margin_bottom">@dimen/dimen_xl</dimen>
 
